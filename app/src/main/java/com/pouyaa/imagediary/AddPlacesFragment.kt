@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
+import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -30,7 +31,9 @@ import java.util.*
  */
 class AddPlacesFragment : Fragment() {
 
-    private var cal = Calendar.getInstance()
+    private lateinit var savedImageOnInternalStorage: Uri
+    private var selectedPlaceLatitude: Double = 0.0
+    private var selectedPlaceLongitude: Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +46,21 @@ class AddPlacesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addDateEditText.setOnClickListener { getActivity()?.let { it1 ->
-            PickDate(addDateEditText).selectDate(
-                it1
-            )
-        } }
+        addDateEditText.setOnClickListener {
+            activity?.let { it1 ->
+                PickDate(addDateEditText).selectDate(
+                    it1
+                )
+            }
+        }
 
-        addImageTextView.setOnClickListener {  showChooseImageDialog()}
+        addImageTextView.setOnClickListener { showChooseImageDialog() }
+
+        saveButton.setOnClickListener {
+            if (checkIsEmptyOnAddPlaceFields()){
+                saveToDatabase()
+            }
+        }
 
     }
 
@@ -82,6 +93,13 @@ class AddPlacesFragment : Fragment() {
                             MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
 
                         imageOfPlaceImageView.setImageBitmap(selectedImageBitmap)
+                        savedImageOnInternalStorage = SaveImageToInternalStorage(
+                            IMAGE_DIRECTORY,
+                            ContextWrapper(activity)
+                        ).saveImage(selectedImageBitmap)
+
+                        Log.e("Saved Image : ", "Path :: $savedImageOnInternalStorage")
+
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(
@@ -97,6 +115,12 @@ class AddPlacesFragment : Fragment() {
 
                 val thumbnail: Bitmap = data?.extras?.get("data") as Bitmap
                 imageOfPlaceImageView.setImageBitmap(thumbnail)
+                savedImageOnInternalStorage = SaveImageToInternalStorage(
+                    IMAGE_DIRECTORY,
+                    ContextWrapper(activity)
+                ).saveImage(thumbnail)
+
+                Log.e("Saved Image : ", "Path :: $savedImageOnInternalStorage")
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             Log.e("Cancelled", "Cancelled")
@@ -188,10 +212,66 @@ class AddPlacesFragment : Fragment() {
         }
     }
 
+    private fun checkIsEmptyOnAddPlaceFields(): Boolean {
+        var result = false
+        when {
+
+            addTitleEditText.text.isNullOrEmpty() -> {
+                Toast.makeText(activity, getString(R.string.pleaseEnterTitle), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            addDescriptionEditText.text.isNullOrEmpty() -> {
+                Toast.makeText(activity, getString(R.string.pleaseEnterDescription), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            addDateEditText.text.isNullOrEmpty() -> {
+                Toast.makeText(activity, getString(R.string.pleaseEnterDate), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            addLocationEditText.text.isNullOrEmpty() -> {
+                Toast.makeText(activity, getString(R.string.pleaseSelectLocation), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            savedImageOnInternalStorage.toString().isEmpty() -> {
+                Toast.makeText(activity, getString(R.string.pleaseAddImage), Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                result = true
+            }
+        }
+        return result
+    }
+
+    private fun saveToDatabase() {
+        val myPlaceModel = PlaceModel(
+            0,
+            addTitleEditText.text.toString(),
+            savedImageOnInternalStorage.toString(),
+            addDescriptionEditText.text.toString(),
+            addDateEditText.text.toString(),
+            addLocationEditText.text.toString(),
+            selectedPlaceLatitude,
+            selectedPlaceLongitude
+        )
+
+
+        val dbHandler = activity?.let { DataBaseHandler(it) }
+
+        val addPlace = dbHandler?.addMyPlace(myPlaceModel)
+
+        if (addPlace != null) {
+            if (addPlace > 0) {
+                Toast.makeText(activity, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
+                activity?.onBackPressed()
+            }
+        }
+    }
+
 
     companion object {
         private const val GALLERY = 1
         private const val CAMERA = 2
+        private const val IMAGE_DIRECTORY = "ImageDiaryImages"
     }
 
 }

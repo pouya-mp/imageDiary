@@ -10,12 +10,13 @@ class PickDate(editText: AppCompatEditText) {
     private var dateEditText = editText
     private var cal = Calendar.getInstance()
 
-    var dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-        setCalendarValues(year, month, dayOfMonth)
-        updateDateEditText()
-    }
+    private var dateSetListener =
+        DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            setCalendarValues(year, month, dayOfMonth)
+            updateDateEditText()
+        }
 
-    fun selectDate(context: Context){
+    fun selectDate(context: Context) {
         DatePickerDialog(
             context, dateSetListener,
             cal.get(Calendar.YEAR),
