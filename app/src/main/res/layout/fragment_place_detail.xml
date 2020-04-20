@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlaceDetailFragment">
+
+    <ScrollView
+        android:id="@+id/placesDetailFragmentScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/titleOfPlaceDetailFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_dark"
+                android:gravity="center"
+                android:text="@string/edit_text_hint_title"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageOfPlaceDetailsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_screen_image_height_size"
+
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_gray_200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleOfPlaceDetailFragment" />
+
+            <TextView
+                android:id="@+id/descriptionOfPlaceDetailsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detail_screen_description_margin"
+                android:layout_marginTop="@dimen/detail_screen_description_margin"
+                android:layout_marginEnd="@dimen/detail_screen_description_margin"
+                android:text="@string/description"
+                android:textColor="@color/detail_screen_description_text_color"
+                android:textSize="@dimen/detail_screen_description_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageOfPlaceDetailsFragment" />
+
+            <TextView
+                android:id="@+id/locationOfPlaceDetailsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detail_screen_location_marginStartEnd"
+                android:layout_marginTop="@dimen/detail_screen_location_marginTop"
+                android:layout_marginEnd="@dimen/detail_screen_location_marginStartEnd"
+                android:text="@string/location"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/detail_screen_location_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionOfPlaceDetailsFragment" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,10 +17,18 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_placesFragment_to_placeDetailFragment"
+            app:destination="@id/placeDesctiptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPlacesFragment"
         android:name="com.pouyaa.imagediary.AddPlacesFragment"
         android:label="fragment_add_places"
         tools:layout="@layout/fragment_add_places" />
+    <fragment
+        android:id="@+id/placeDesctiptionFragment"
+        android:name="com.pouyaa.imagediary.PlaceDetailFragment"
+        android:label="fragment_place_desctiption"
+        tools:layout="@layout/fragment_place_detail" />
 </navigation>

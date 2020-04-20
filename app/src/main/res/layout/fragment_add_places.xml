@@ -22,13 +22,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addTitleTextInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Design.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/addTitleEditText"
@@ -37,15 +36,14 @@
                     android:hint="@string/edit_text_hint_title"
                     android:inputType="textCapWords"
                     android:textColor="@color/primary_text_color"
-                    android:textColorHint="@color/secondary_text_color"
-                    />
+                    android:textColorHint="@color/secondary_text_color" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addDescriptionTextInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Design.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/add_screen_til_marginTop"
@@ -66,7 +64,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addDateTextInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Design.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/add_screen_til_marginTop"
@@ -78,10 +76,10 @@
                     android:id="@+id/addDateEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/edit_text_hint_date"
-                    android:inputType="text"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
+                    android:hint="@string/edit_text_hint_date"
+                    android:inputType="text"
                     android:textColor="@color/primary_text_color"
                     android:textColorHint="@color/secondary_text_color"
                     android:textSize="@dimen/edit_text_text_size" />
@@ -89,7 +87,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addLocationTextInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Design.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/add_screen_til_marginTop"
@@ -120,8 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout"
-                />
+                app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout" />
 
             <TextView
                 android:id="@+id/addImageTextView"
@@ -134,12 +131,10 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/add_screen_text_add_image_textSize"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout"
                 app:layout_constraintBottom_toTopOf="@id/saveButton"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageOfPlaceImageView"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-
+                app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout" />
 
 
             <Button
@@ -160,7 +155,6 @@
                 app:layout_constraintTop_toBottomOf="@id/imageOfPlaceImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </ScrollView>

@@ -22,4 +22,7 @@
     <string name="pleaseAddImage">Please add image</string>
     <string name="noPlacesAddedYet">No places added yet</string>
     <string name="imageOfPlace">Image of place</string>
+
+    <string name="description">Description</string>
+    <string name="location">Location</string>
 </resources>

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_places.*
  */
 class PlacesFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,38 +27,57 @@ class PlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addPlacesFloatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.addPlacesFragment)
+            findNavController().navigate(R.id.action_placesFragment_to_addPlacesFragment)
         }
-        getPlacesList()
+        fetchPlacesList()
 
     }
 
-    private fun getPlacesList(){
-        val dbHandler = activity?.let { DataBaseHandler(it) }
-        val placesList = dbHandler?.getMyPlacesList()
+    private fun fetchPlacesList() {
 
-        if (placesList != null) {
-            if (placesList.size > 0){
+        context?.let {
+            val dbHandler = DataBaseHandler(it)
+            val placesList = dbHandler.myPlacesList()
+
+            if (placesList.isNotEmpty()) {
                 placesListRecycleView.visibility = View.VISIBLE
                 noPlacesAddedYetTextView.visibility = View.GONE
-                if (placesList != null) {
-                    setupMyPlacesRecycleView(placesList)
-                }
-            }else {
+                setupMyPlacesRecycleView(placesList)
+            } else {
                 placesListRecycleView.visibility = View.GONE
                 noPlacesAddedYetTextView.visibility = View.VISIBLE
 
             }
         }
 
+
     }
 
-    private fun setupMyPlacesRecycleView(myPlacesList: ArrayList<PlaceModel>){
-        placesListRecycleView.layoutManager = LinearLayoutManager(activity)
+    private fun setupMyPlacesRecycleView(myPlacesList: List<PlaceModel>) {
+        placesListRecycleView.layoutManager = LinearLayoutManager(context)
         placesListRecycleView.setHasFixedSize(true)
 
-        val placesAdapter = activity?.let { PlacesAdapter(it,myPlacesList) }
-        placesListRecycleView.adapter = placesAdapter
+        context?.let {
+            val placeAdapter = PlacesAdapter(it, myPlacesList)
+            placesListRecycleView.adapter = placeAdapter
+            placeAdapter.setOnClickListener(object : PlacesAdapter.OnClickListener{
+                override fun onClick(position: Int, model: PlaceModel) {
+                    val bundle = Bundle()
+                    bundle.putSerializable(DETAILS_FRAGMENT_KEY,model)
+                    findNavController().navigate(R.id.action_placesFragment_to_placeDetailFragment,bundle)
+                }
+
+            })
+
+
+        }
+
+
     }
+
+    companion object{
+        const val DETAILS_FRAGMENT_KEY = "DetailsFragmentKey"
+    }
+
 
 }

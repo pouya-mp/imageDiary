@@ -1,6 +1,9 @@
 package com.pouyaa.imagediary
 
-data class PlaceModel (
+import java.io.Serializable
+
+
+data class PlaceModel(
     val id: Int,
     val title: String,
     val image: String,
@@ -10,4 +13,4 @@ data class PlaceModel (
     val latitude: Double,
     val longitude: Double
 
-)
+): Serializable

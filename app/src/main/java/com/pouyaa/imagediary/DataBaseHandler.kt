@@ -50,7 +50,7 @@ class DataBaseHandler(context: Context) :
 
     }
 
-    fun getMyPlacesList(): ArrayList<PlaceModel> {
+    fun myPlacesList(): List<PlaceModel> {
         val myPlacesList = ArrayList<PlaceModel>()
         val dbHandler = readableDatabase
 
@@ -77,7 +77,7 @@ class DataBaseHandler(context: Context) :
             cursor.close()
         } catch (e: SQLiteException) {
             e.printStackTrace()
-            return ArrayList()
+            return emptyList()
         }
 
         return myPlacesList
