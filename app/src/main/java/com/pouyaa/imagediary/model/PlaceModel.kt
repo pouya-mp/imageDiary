@@ -4,13 +4,13 @@ import java.io.Serializable
 
 
 data class PlaceModel(
-    val id: Int,
-    val title: String,
-    val image: String,
-    val description: String,
-    val date: String,
-    val location: String,
-    val latitude: Double,
-    val longitude: Double
+    var id: Int,
+    var title: String,
+    var image: String,
+    var description: String,
+    var date: String,
+    var location: String,
+    var latitude: Double,
+    var longitude: Double
 
-): Serializable
+) : Serializable

@@ -2,48 +2,45 @@ package com.pouyaa.imagediary.ui.fragments
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.pouyaa.imagediary.databinding.FragmentPlaceDetailBinding
 import com.pouyaa.imagediary.model.PlaceModel
-import com.pouyaa.imagediary.R
-import kotlinx.android.synthetic.main.fragment_place_detail.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class PlaceDetailFragment : Fragment() {
 
-    private var title: String = ""
-    private var placeImage: String = ""
-    private var placeDescription: String = "123"
-    private var placeLocation: String = ""
+    private var _binding: FragmentPlaceDetailBinding? = null
+
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_place_detail, container, false)
-
-
+        _binding = FragmentPlaceDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (arguments?.getSerializable(PlacesFragment.DETAILS_FRAGMENT_KEY) as? PlaceModel)?.let {
-            refreshView(it)
+            binding.place = it
+            binding.invalidateAll()
+            binding.imageOfPlaceDetailsFragment.setImageURI(Uri.parse(it.image))
         }
     }
 
-
-    private fun refreshView(model: PlaceModel) {
-        titleOfPlaceDetailFragment.text = model.title
-        descriptionOfPlaceDetailsFragment.text = model.description
-        imageOfPlaceDetailsFragment.setImageURI(Uri.parse(model.image))
-        locationOfPlaceDetailsFragment.text = model.location
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
-
 }
