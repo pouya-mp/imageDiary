@@ -1,4 +1,4 @@
-package com.pouyaa.imagediary
+package com.pouyaa.imagediary.model
 
 import java.io.Serializable
 

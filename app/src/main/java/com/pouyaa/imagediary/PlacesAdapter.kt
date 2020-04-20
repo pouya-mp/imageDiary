@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pouyaa.imagediary.model.PlaceModel
 import kotlinx.android.synthetic.main.places_layout.view.*
 
 open class PlacesAdapter(
@@ -35,10 +36,7 @@ open class PlacesAdapter(
         holder.itemView.placeDescriptionTextView.text = model.description
 
         holder.itemView.setOnClickListener {
-
-            if (onClickListener != null) {
-                onClickListener!!.onClick(position, model)
-            }
+            onClickListener?.onClick(position, model)
         }
     }
 

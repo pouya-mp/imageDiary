@@ -1,7 +1,8 @@
-package com.pouyaa.imagediary
+package com.pouyaa.imagediary.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.pouyaa.imagediary.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.pouyaa.imagediary
+package com.pouyaa.imagediary.ui.fragments
 
 import android.Manifest
 import android.app.Activity
@@ -23,6 +23,8 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.pouyaa.imagediary.*
+import com.pouyaa.imagediary.model.PlaceModel
 import kotlinx.android.synthetic.main.fragment_add_places.*
 import java.io.IOException
 
@@ -145,7 +147,9 @@ class AddPlacesFragment : Fragment() {
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                             )
 
-                            startActivityForResult(galleryIntent, GALLERY)
+                            startActivityForResult(galleryIntent,
+                                GALLERY
+                            )
 
                         }
                     }
@@ -174,7 +178,9 @@ class AddPlacesFragment : Fragment() {
                     if (report != null) {
                         if (report.areAllPermissionsGranted()) {
                             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                            startActivityForResult(intent, CAMERA)
+                            startActivityForResult(intent,
+                                CAMERA
+                            )
                         }
                     }
                 }
