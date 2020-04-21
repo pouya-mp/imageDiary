@@ -15,7 +15,7 @@ class SaveImageToInternalStorage(imageDirectory: String, applicationContext: Con
     private val wrapper = ContextWrapper(applicationContext)
     private var file = wrapper.getDir(imageDirectory, Context.MODE_PRIVATE)
 
-     fun saveImage(bitmap: Bitmap): Uri {
+    fun saveImage(bitmap: Bitmap): Uri {
         file = File(file, "${UUID.randomUUID()}.jpg")
 
 
