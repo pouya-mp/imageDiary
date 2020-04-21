@@ -23,7 +23,11 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.pouyaa.imagediary.*
+import com.pouyaa.imagediary.DataBaseHandler
+import com.pouyaa.imagediary.PickDate
+import com.pouyaa.imagediary.R
+import com.pouyaa.imagediary.SaveImageToInternalStorage
+import com.pouyaa.imagediary.databinding.FragmentAddPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
 import kotlinx.android.synthetic.main.fragment_add_places.*
 import java.io.IOException
@@ -33,20 +37,46 @@ import java.io.IOException
  */
 class AddPlacesFragment : Fragment() {
 
-    private lateinit var savedImageOnInternalStorage: Uri
+    private var _binding: FragmentAddPlacesBinding? = null
+
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding
+        get() = _binding!!
+
+    private var savedImageOnInternalStorage: Uri? = null
     private var selectedPlaceLatitude: Double = 0.0
     private var selectedPlaceLongitude: Double = 0.0
+    private var updatePlaceWithId: Int? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        _binding = FragmentAddPlacesBinding.inflate(inflater, container, false)
+        return binding.root
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_places, container, false)
+//        return inflater.inflate(R.layout.fragment_add_places, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (arguments?.getSerializable(PlacesFragment.DETAILS_FRAGMENT_KEY) as? PlaceModel)?.let {
+
+            binding.place = it
+            binding.invalidateAll()
+            savedImageOnInternalStorage = Uri.parse(it.image)
+            binding.imageOfPlaceImageView.setImageURI(savedImageOnInternalStorage)
+            binding.addImageTextView.text = getString(R.string.changeImage)
+            binding.saveButton.text = getString(R.string.saveChanges)
+            updatePlaceWithId = it.id
+        }
+
 
         addDateEditText.setOnClickListener {
             activity?.let { it1 ->
@@ -94,14 +124,13 @@ class AddPlacesFragment : Fragment() {
                         val selectedImageBitmap =
                             MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
 
-                        imageOfPlaceImageView.setImageBitmap(selectedImageBitmap)
+                        binding.imageOfPlaceImageView.setImageBitmap(selectedImageBitmap)
                         savedImageOnInternalStorage = SaveImageToInternalStorage(
                             IMAGE_DIRECTORY,
                             ContextWrapper(activity)
                         ).saveImage(selectedImageBitmap)
 
                         Log.e("Saved Image : ", "Path :: $savedImageOnInternalStorage")
-
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(
@@ -116,7 +145,7 @@ class AddPlacesFragment : Fragment() {
             } else if (requestCode == CAMERA) {
 
                 val thumbnail: Bitmap = data?.extras?.get("data") as Bitmap
-                imageOfPlaceImageView.setImageBitmap(thumbnail)
+                binding.imageOfPlaceImageView.setImageBitmap(thumbnail)
                 savedImageOnInternalStorage = SaveImageToInternalStorage(
                     IMAGE_DIRECTORY,
                     ContextWrapper(activity)
@@ -147,7 +176,8 @@ class AddPlacesFragment : Fragment() {
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                             )
 
-                            startActivityForResult(galleryIntent,
+                            startActivityForResult(
+                                galleryIntent,
                                 GALLERY
                             )
 
@@ -178,7 +208,8 @@ class AddPlacesFragment : Fragment() {
                     if (report != null) {
                         if (report.areAllPermissionsGranted()) {
                             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                            startActivityForResult(intent,
+                            startActivityForResult(
+                                intent,
                                 CAMERA
                             )
                         }
@@ -204,8 +235,6 @@ class AddPlacesFragment : Fragment() {
                 ) { _, _ ->
                     try {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-//                        val uri = Uri.fromParts("package", pack, null)
-//                        intent.data = uri
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
                         e.printStackTrace()
@@ -222,11 +251,11 @@ class AddPlacesFragment : Fragment() {
         var result = false
         when {
 
-            addTitleEditText.text.isNullOrEmpty() -> {
+            binding.addTitleEditText.text.isNullOrEmpty() -> {
                 Toast.makeText(activity, getString(R.string.pleaseEnterTitle), Toast.LENGTH_SHORT)
                     .show()
             }
-            addDescriptionEditText.text.isNullOrEmpty() -> {
+            binding.addDescriptionEditText.text.isNullOrEmpty() -> {
                 Toast.makeText(
                     activity,
                     getString(R.string.pleaseEnterDescription),
@@ -234,11 +263,11 @@ class AddPlacesFragment : Fragment() {
                 )
                     .show()
             }
-            addDateEditText.text.isNullOrEmpty() -> {
+            binding.addDateEditText.text.isNullOrEmpty() -> {
                 Toast.makeText(activity, getString(R.string.pleaseEnterDate), Toast.LENGTH_SHORT)
                     .show()
             }
-            addLocationEditText.text.isNullOrEmpty() -> {
+            binding.addLocationEditText.text.isNullOrEmpty() -> {
                 Toast.makeText(
                     activity,
                     getString(R.string.pleaseSelectLocation),
@@ -246,7 +275,7 @@ class AddPlacesFragment : Fragment() {
                 )
                     .show()
             }
-            savedImageOnInternalStorage.toString().isEmpty() -> {
+            savedImageOnInternalStorage == null -> {
                 Toast.makeText(activity, getString(R.string.pleaseAddImage), Toast.LENGTH_SHORT)
                     .show()
             }
@@ -258,13 +287,17 @@ class AddPlacesFragment : Fragment() {
     }
 
     private fun saveToDatabase() {
+
+        var id = 0
+        updatePlaceWithId?.let { id = it }
+
         val myPlaceModel = PlaceModel(
-            0,
-            addTitleEditText.text.toString(),
+            id,
+            binding.addTitleEditText.text.toString(),
             savedImageOnInternalStorage.toString(),
-            addDescriptionEditText.text.toString(),
-            addDateEditText.text.toString(),
-            addLocationEditText.text.toString(),
+            binding.addDescriptionEditText.text.toString(),
+            binding.addDateEditText.text.toString(),
+            binding.addLocationEditText.text.toString(),
             selectedPlaceLatitude,
             selectedPlaceLongitude
         )
@@ -272,14 +305,29 @@ class AddPlacesFragment : Fragment() {
 
         val dbHandler = activity?.let { DataBaseHandler(it) }
 
-        val addPlace = dbHandler?.addMyPlace(myPlaceModel)
+        if (updatePlaceWithId == null) {
+            val addPlace = dbHandler?.addMyPlace(myPlaceModel)
 
-        if (addPlace != null) {
-            if (addPlace > 0) {
-                Toast.makeText(activity, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
-                findNavController().popBackStack()
+
+
+            if (addPlace != null) {
+                if (addPlace > 0) {
+                    Toast.makeText(activity, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+            } else {
+                val updatePlace = dbHandler?.updateMyPlace(myPlaceModel)
+                updatePlace?.let {
+                    if (updatePlace > 0) {
+                        Toast.makeText(context, "Place Updated", Toast.LENGTH_SHORT).show()
+                        findNavController().popBackStack()
+                    }
+                }
             }
+
         }
+
+
     }
 
 

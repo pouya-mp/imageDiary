@@ -51,6 +51,30 @@ class DataBaseHandler(context: Context) :
 
     }
 
+    fun updateMyPlace(placeModel: PlaceModel): Int {
+
+        val dbHandler = writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(KEY_TITLE, placeModel.title)
+        contentValues.put(KEY_IMAGE, placeModel.image)
+        contentValues.put(
+            KEY_DESCRIPTION,
+            placeModel.description
+        )
+        contentValues.put(KEY_DATE, placeModel.date)
+        contentValues.put(KEY_LOCATION, placeModel.location)
+        contentValues.put(KEY_LATITUDE, placeModel.latitude)
+        contentValues.put(KEY_LONGITUDE, placeModel.longitude)
+
+        val result =
+            dbHandler.update(TABLE_MY_PLACES, contentValues, KEY_ID + "=" + placeModel.id, null)
+        dbHandler.close()
+        return result
+
+    }
+
     fun myPlacesList(): List<PlaceModel> {
         val myPlacesList = ArrayList<PlaceModel>()
         val dbHandler = readableDatabase

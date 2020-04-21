@@ -25,4 +25,7 @@
 
     <string name="description">Description</string>
     <string name="location">Location</string>
+
+    <string name="changeImage">CHANGE IMAGE</string>
+    <string name="saveChanges">SAVE CHANGES</string>
 </resources>

@@ -20,7 +20,7 @@
             android:textSize="@dimen/noPlacesAddedTextSize"
             android:text="@string/noPlacesAddedYet"
             android:gravity="center"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addPlacesFloatingActionButton"

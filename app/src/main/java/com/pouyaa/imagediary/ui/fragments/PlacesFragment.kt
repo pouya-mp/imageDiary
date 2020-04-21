@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.pouyaa.imagediary.DataBaseHandler
 import com.pouyaa.imagediary.PlacesAdapter
 import com.pouyaa.imagediary.R
+import com.pouyaa.imagediary.SwipeToEditCallback
 import com.pouyaa.imagediary.databinding.FragmentPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
 
@@ -94,9 +97,27 @@ class PlacesFragment : Fragment() {
 
 
         }
+        context?.let {
+            val swipeHandler = object : SwipeToEditCallback(it) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val adapter = binding.placesListRecycleView.adapter as PlacesAdapter
+                    val model = adapter.getPlaceModel(viewHolder.adapterPosition)
+                    val bundle = Bundle()
+                    bundle.putSerializable(DETAILS_FRAGMENT_KEY, model)
+                    findNavController().navigate(
+                        R.id.action_placesFragment_to_addPlacesFragment,
+                        bundle
+                    )
+                }
+
+            }
+            val editItemTouchHelper = ItemTouchHelper(swipeHandler)
+            editItemTouchHelper.attachToRecyclerView(binding.placesListRecycleView)
+        }
 
 
     }
+
 
     companion object {
         const val DETAILS_FRAGMENT_KEY = "DetailsFragmentKey"

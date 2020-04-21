@@ -9,7 +9,7 @@
         android:id="@+id/placesFragment"
         android:name="com.pouyaa.imagediary.ui.fragments.PlacesFragment"
         android:label="fragment_places"
-        tools:layout="@layout/fragment_places" >
+        tools:layout="@layout/fragment_places">
         <action
             android:id="@+id/action_placesFragment_to_addPlacesFragment"
             app:destination="@id/addPlacesFragment"

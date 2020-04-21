@@ -5,22 +5,36 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaa.imagediary.model.PlaceModel
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.places_layout.view.*
 
-open class PlacesAdapter(
-    private var context: Context,
-    private var myList: List<PlaceModel>
+class PlacesAdapter(
+        private var context: Context,
+        private var myList: List<PlaceModel>
 ) : RecyclerView.Adapter<PlacesAdapter.MyViewHolder>() {
     private var onClickListener: OnClickListener? = null
 
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+
+        val placeTitle: TextView = view.placeTitleTextView
+        val placeImage: CircleImageView = view.selectedImageOfPlaceImageView
+        val placeDescription: TextView = view.placeDescriptionTextView
+
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+
         return MyViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.places_layout, parent, false)
+
+                LayoutInflater.from(context).inflate(R.layout.places_layout, parent, false)
+
+
         )
     }
 
@@ -31,9 +45,11 @@ open class PlacesAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val model = myList[position]
 
-        holder.itemView.selectedImageOfPlaceImageView.setImageURI(Uri.parse(model.image))
-        holder.itemView.placeTitleTextView.text = model.title
-        holder.itemView.placeDescriptionTextView.text = model.description
+        holder.placeDescription.text = model.description
+        holder.placeImage.setImageURI(Uri.parse(model.image))
+        holder.placeTitle.text = model.title
+
+
 
         holder.itemView.setOnClickListener {
             onClickListener?.onClick(position, model)
@@ -48,4 +64,7 @@ open class PlacesAdapter(
         fun onClick(position: Int, model: PlaceModel)
     }
 
+    fun getPlaceModel(position: Int): PlaceModel {
+        return myList[position]
+    }
 }
