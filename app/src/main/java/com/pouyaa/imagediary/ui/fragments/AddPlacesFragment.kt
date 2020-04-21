@@ -315,16 +315,16 @@ class AddPlacesFragment : Fragment() {
                     Toast.makeText(activity, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
-            } else {
-                val updatePlace = dbHandler?.updateMyPlace(myPlaceModel)
-                updatePlace?.let {
-                    if (updatePlace > 0) {
-                        Toast.makeText(context, "Place Updated", Toast.LENGTH_SHORT).show()
-                        findNavController().popBackStack()
-                    }
-                }
             }
 
+        } else {
+            val updatePlace = dbHandler?.updateMyPlace(myPlaceModel)
+            updatePlace?.let {
+                if (updatePlace > 0) {
+                    Toast.makeText(context, "Place Updated", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+            }
         }
 
 

@@ -12,8 +12,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.places_layout.view.*
 
 class PlacesAdapter(
-        private var context: Context,
-        private var myList: List<PlaceModel>
+    private var context: Context,
+    private var myList: List<PlaceModel>
 ) : RecyclerView.Adapter<PlacesAdapter.MyViewHolder>() {
     private var onClickListener: OnClickListener? = null
 
@@ -32,7 +32,7 @@ class PlacesAdapter(
 
         return MyViewHolder(
 
-                LayoutInflater.from(context).inflate(R.layout.places_layout, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.places_layout, parent, false)
 
 
         )
