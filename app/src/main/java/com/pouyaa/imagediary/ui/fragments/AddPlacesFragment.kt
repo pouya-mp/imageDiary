@@ -159,7 +159,7 @@ class AddPlacesFragment : Fragment() {
     }
 
     private fun choosePhotoFromGallery() {
-        Dexter.withActivity(activity)
+        Dexter.withContext(activity)
             .withPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -306,21 +306,15 @@ class AddPlacesFragment : Fragment() {
         val dbHandler = activity?.let { DataBaseHandler(it) }
 
         if (updatePlaceWithId == null) {
-            val addPlace = dbHandler?.addMyPlace(myPlaceModel)
-
-
-
-            if (addPlace != null) {
-                if (addPlace > 0) {
+            dbHandler?.addMyPlace(myPlaceModel)?.let {
+                if (it > 0) {
                     Toast.makeText(activity, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
             }
-
         } else {
-            val updatePlace = dbHandler?.updateMyPlace(myPlaceModel)
-            updatePlace?.let {
-                if (updatePlace > 0) {
+            dbHandler?.updateMyPlace(myPlaceModel)?.let {
+                if (it > 0) {
                     Toast.makeText(context, "Place Updated", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }

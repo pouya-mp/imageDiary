@@ -35,7 +35,6 @@ class PlaceDetailFragment : Fragment() {
         (arguments?.getSerializable(PlacesFragment.DETAILS_FRAGMENT_KEY) as? PlaceModel)?.let {
             binding.place = it
             binding.invalidateAll()
-            binding.imageOfPlaceDetailsFragment.setImageURI(Uri.parse(it.image))
         }
     }
 

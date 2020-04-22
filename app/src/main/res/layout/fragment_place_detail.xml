@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="place"
             type="com.pouyaa.imagediary.model.PlaceModel" />
@@ -35,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/holo_blue_dark"
                     android:gravity="center"
-                    android:text="@={place.title}"
+                    android:text="@{place.title}"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:textStyle="normal"
@@ -44,16 +43,17 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@string/edit_text_hint_title" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/imageOfPlaceDetailsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/detail_screen_image_height_size"
-
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_image_gray_200dp"
+                    app:imageStr="@{place.image}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/titleOfPlaceDetailFragment" />
+                    app:layout_constraintTop_toBottomOf="@id/titleOfPlaceDetailFragment"
+                    android:contentDescription="User image" />
 
                 <TextView
                     android:id="@+id/descriptionOfPlaceDetailsFragment"
@@ -62,7 +62,7 @@
                     android:layout_marginStart="@dimen/detail_screen_description_margin"
                     android:layout_marginTop="@dimen/detail_screen_description_margin"
                     android:layout_marginEnd="@dimen/detail_screen_description_margin"
-                    android:text="@={place.description}"
+                    android:text="@{place.description}"
                     android:textColor="@color/detail_screen_description_text_color"
                     android:textSize="@dimen/detail_screen_description_text_size"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
                     android:layout_marginStart="@dimen/detail_screen_location_marginStartEnd"
                     android:layout_marginTop="@dimen/detail_screen_location_marginTop"
                     android:layout_marginEnd="@dimen/detail_screen_location_marginStartEnd"
-                    android:text="@={place.location}"
+                    android:text="@{place.location}"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/detail_screen_location_text_size"
                     android:textStyle="bold"
