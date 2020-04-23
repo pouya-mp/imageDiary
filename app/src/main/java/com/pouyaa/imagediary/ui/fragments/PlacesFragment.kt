@@ -7,10 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pouyaa.imagediary.DataBaseHandler
-import com.pouyaa.imagediary.PlacesAdapter
-import com.pouyaa.imagediary.R
-import com.pouyaa.imagediary.SwipeToEditCallback
+import com.pouyaa.imagediary.*
 import com.pouyaa.imagediary.databinding.FragmentPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
 
@@ -109,7 +106,7 @@ class PlacesFragment : Fragment() {
 
         }
         context?.let {
-            val swipeHandler = object : SwipeToEditCallback(it) {
+            val editSwipeHandler = object : SwipeToEditCallback(it) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val adapter = binding.placesListRecycleView.adapter as PlacesAdapter
                     val model = adapter.getPlaceModel(viewHolder.adapterPosition)
@@ -122,8 +119,22 @@ class PlacesFragment : Fragment() {
                 }
 
             }
-            val editItemTouchHelper = ItemTouchHelper(swipeHandler)
+            val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
             editItemTouchHelper.attachToRecyclerView(binding.placesListRecycleView)
+
+            val deleteSwipeHandler = object : SwipeToDeleteCallback(it) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val adapter = binding.placesListRecycleView.adapter as PlacesAdapter
+                    val model = adapter.getPlaceModel(viewHolder.adapterPosition)
+                    val dbHandler = DataBaseHandler(it)
+                    dbHandler.removeMyPlace(model)
+                    fetchPlacesList()
+                }
+
+            }
+            val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
+            deleteItemTouchHelper.attachToRecyclerView(binding.placesListRecycleView)
+
         }
 
 

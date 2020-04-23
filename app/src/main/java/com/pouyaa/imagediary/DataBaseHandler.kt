@@ -78,6 +78,13 @@ class DataBaseHandler(context: Context) :
 
     }
 
+    fun removeMyPlace(placeModel: PlaceModel): Int {
+        val dbHandler = writableDatabase
+        var result = dbHandler.delete(TABLE_MY_PLACES, KEY_ID + "=" + placeModel.id, null)
+        dbHandler.close()
+        return result
+    }
+
     fun myPlacesList(): List<PlaceModel> {
         val myPlacesList = ArrayList<PlaceModel>()
         val dbHandler = readableDatabase
