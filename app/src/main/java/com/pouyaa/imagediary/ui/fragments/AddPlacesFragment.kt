@@ -48,28 +48,27 @@ class AddPlacesFragment : Fragment() {
     private var selectedPlaceLatitude: Double = 0.0
     private var selectedPlaceLongitude: Double = 0.0
     private var updatePlaceWithId: Int? = null
+    private var checkImage = false
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
+
         savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentAddPlacesBinding.inflate(inflater, container, false)
         return binding.root
 
-
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_add_places, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (arguments?.getSerializable(PlacesFragment.DETAILS_FRAGMENT_KEY) as? PlaceModel)?.let {
-
             binding.place = it
             binding.invalidateAll()
+            checkImage = true
             savedImageOnInternalStorage = Uri.parse(it.image)
             binding.imageOfPlaceImageView.setImageURI(savedImageOnInternalStorage)
             binding.addImageTextView.text = getString(R.string.changeImage)
@@ -129,7 +128,7 @@ class AddPlacesFragment : Fragment() {
                             IMAGE_DIRECTORY,
                             ContextWrapper(activity)
                         ).saveImage(selectedImageBitmap)
-
+                        checkImage = true
                         Log.e("Saved Image : ", "Path :: $savedImageOnInternalStorage")
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -150,7 +149,7 @@ class AddPlacesFragment : Fragment() {
                     IMAGE_DIRECTORY,
                     ContextWrapper(activity)
                 ).saveImage(thumbnail)
-
+                checkImage = true
                 Log.e("Saved Image : ", "Path :: $savedImageOnInternalStorage")
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -275,7 +274,7 @@ class AddPlacesFragment : Fragment() {
                 )
                     .show()
             }
-            savedImageOnInternalStorage == null -> {
+            !checkImage -> {
                 Toast.makeText(activity, getString(R.string.pleaseAddImage), Toast.LENGTH_SHORT)
                     .show()
             }
@@ -300,6 +299,7 @@ class AddPlacesFragment : Fragment() {
             binding.addLocationEditText.text.toString(),
             selectedPlaceLatitude,
             selectedPlaceLongitude
+
         )
 
 
@@ -308,7 +308,7 @@ class AddPlacesFragment : Fragment() {
         if (updatePlaceWithId == null) {
             dbHandler?.addMyPlace(myPlaceModel)?.let {
                 if (it > 0) {
-                    Toast.makeText(activity, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Saved Place Successfully", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
             }

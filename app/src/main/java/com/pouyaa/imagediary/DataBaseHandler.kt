@@ -19,7 +19,8 @@ class DataBaseHandler(context: Context) :
                 + KEY_DATE + " TEXT,"
                 + KEY_LOCATION + " TEXT,"
                 + KEY_LATITUDE + " TEXT,"
-                + KEY_LONGITUDE + " TEXT)")
+                + KEY_LONGITUDE + " TEXT)"
+                )
         db?.execSQL(createMyPlaceTable)
     }
 
@@ -45,6 +46,7 @@ class DataBaseHandler(context: Context) :
         contentValues.put(KEY_LATITUDE, placeModel.latitude)
         contentValues.put(KEY_LONGITUDE, placeModel.longitude)
 
+
         val result = dbHandler.insert(TABLE_MY_PLACES, null, contentValues)
         dbHandler.close()
         return result
@@ -67,6 +69,7 @@ class DataBaseHandler(context: Context) :
         contentValues.put(KEY_LOCATION, placeModel.location)
         contentValues.put(KEY_LATITUDE, placeModel.latitude)
         contentValues.put(KEY_LONGITUDE, placeModel.longitude)
+
 
         val result =
             dbHandler.update(TABLE_MY_PLACES, contentValues, KEY_ID + "=" + placeModel.id, null)
@@ -121,5 +124,6 @@ class DataBaseHandler(context: Context) :
         private const val KEY_LOCATION = "location"
         private const val KEY_LATITUDE = "latitude"
         private const val KEY_LONGITUDE = "longitude"
+
     }
 }

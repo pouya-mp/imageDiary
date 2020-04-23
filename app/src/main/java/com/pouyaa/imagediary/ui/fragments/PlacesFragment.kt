@@ -55,7 +55,7 @@ class PlacesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.addButton) {
-            return true
+            findNavController().navigate(R.id.action_placesFragment_to_addPlacesFragment)
         }
         return super.onOptionsItemSelected(item)
     }
