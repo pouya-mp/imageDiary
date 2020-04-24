@@ -29,13 +29,8 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/places_content_padding">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/selectedImageOfPlaceImageView"
-                    android:layout_width="@dimen/place_circular_image_size"
-                    android:layout_height="@dimen/place_circular_image_size"
-                    android:contentDescription="@string/imageOfPlace"
-                    android:src="@mipmap/ic_launcher_round"
-                    app:civ_border_color="@color/circular_image_border_color" />
+                <include layout="@layout/circucal_image_view"/>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
