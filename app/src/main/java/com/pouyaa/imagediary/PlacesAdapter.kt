@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pouyaa.imagediary.model.PlaceModel
-import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.circucal_image_view.view.*
 import kotlinx.android.synthetic.main.places_layout.view.*
 
