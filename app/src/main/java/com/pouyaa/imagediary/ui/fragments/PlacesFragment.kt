@@ -39,7 +39,7 @@ class PlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.addPlacesFloatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_placesFragment_to_addPlacesFragment)
+            findNavController().navigate(PlacesFragmentDirections.actionPlacesFragmentToAddPlacesFragment())
         }
 
         fetchPlacesList()
@@ -94,11 +94,10 @@ class PlacesFragment : Fragment() {
             placeAdapter.setOnClickListener(object :
                 PlacesAdapter.OnClickListener {
                 override fun onClick(position: Int, model: PlaceModel) {
-                    val bundle = Bundle()
-                    bundle.putSerializable(DETAILS_FRAGMENT_KEY, model)
                     findNavController().navigate(
-                        R.id.action_placesFragment_to_placeDetailFragment,
-                        bundle
+                        PlacesFragmentDirections.actionPlacesFragmentToPlaceDetailFragment(
+                            model
+                        )
                     )
                 }
 
@@ -111,12 +110,9 @@ class PlacesFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val adapter = binding.placesListRecycleView.adapter as PlacesAdapter
                     val model = adapter.getPlaceModel(viewHolder.adapterPosition)
-                    val bundle = Bundle()
-                    bundle.putSerializable(DETAILS_FRAGMENT_KEY, model)
-                    findNavController().navigate(
-                        R.id.action_placesFragment_to_addPlacesFragment,
-                        bundle
-                    )
+                    val action = PlacesFragmentDirections.actionPlacesFragmentToAddPlacesFragment()
+                    action.place = model
+                    findNavController().navigate(action)
                 }
 
             }
@@ -137,14 +133,5 @@ class PlacesFragment : Fragment() {
             deleteItemTouchHelper.attachToRecyclerView(binding.placesListRecycleView)
 
         }
-
-
     }
-
-
-    companion object {
-        const val DETAILS_FRAGMENT_KEY = "DetailsFragmentKey"
-    }
-
-
 }

@@ -31,10 +31,9 @@ class PlaceDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (arguments?.getSerializable(PlacesFragment.DETAILS_FRAGMENT_KEY) as? PlaceModel)?.let {
-            binding.place = it
-            binding.invalidateAll()
-        }
+        val args = PlaceDetailFragmentArgs.fromBundle(requireArguments())
+        binding.place = args.place
+        binding.invalidateAll()
     }
 
     override fun onDestroyView() {

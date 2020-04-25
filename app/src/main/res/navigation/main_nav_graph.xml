@@ -24,9 +24,19 @@
     <fragment
         android:id="@+id/addPlacesFragment"
         android:name="com.pouyaa.imagediary.ui.fragments.AddPlacesFragment"
-        tools:layout="@layout/fragment_add_places" />
+        tools:layout="@layout/fragment_add_places" >
+        <argument
+            android:name="place"
+            app:argType="com.pouyaa.imagediary.model.PlaceModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/placeDesctiptionFragment"
         android:name="com.pouyaa.imagediary.ui.fragments.PlaceDetailFragment"
-        tools:layout="@layout/fragment_place_detail" />
+        tools:layout="@layout/fragment_place_detail" >
+        <argument
+            android:name="place"
+            app:argType="com.pouyaa.imagediary.model.PlaceModel" />
+    </fragment>
 </navigation>

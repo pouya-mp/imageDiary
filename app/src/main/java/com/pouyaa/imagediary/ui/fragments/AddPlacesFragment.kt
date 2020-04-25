@@ -63,17 +63,21 @@ class AddPlacesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (arguments?.getSerializable(PlacesFragment.DETAILS_FRAGMENT_KEY) as? PlaceModel)?.let {
-            binding.place = it
-            binding.invalidateAll()
+        val args = AddPlacesFragmentArgs.fromBundle(requireArguments())
+
+        args.place?.let {
             checkImage = true
-            savedImageOnInternalStorage = Uri.parse(it.image)
-            binding.imageOfPlaceImageView.setImageURI(savedImageOnInternalStorage)
-            binding.addImageTextView.text = getString(R.string.changeImage)
-            binding.saveButton.text = getString(R.string.saveChanges)
-            updatePlaceWithId = it.id
+            savedImageOnInternalStorage = Uri.parse(args.place?.image)
+            updatePlaceWithId = args.place?.id
         }
 
+        binding.apply {
+            place = args.place
+            invalidateAll()
+            imageOfPlaceImageView.setImageURI(savedImageOnInternalStorage)
+            addImageTextView.text = getString(R.string.changeImage)
+            saveButton.text = getString(R.string.saveChanges)
+        }
 
         addDateEditText.setOnClickListener {
             activity?.let { it1 ->
