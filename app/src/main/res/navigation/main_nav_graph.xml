@@ -38,5 +38,8 @@
         <argument
             android:name="place"
             app:argType="com.pouyaa.imagediary.model.PlaceModel" />
+        <action
+            android:id="@+id/action_placeDesctiptionFragment_to_addPlacesFragment"
+            app:destination="@id/addPlacesFragment" />
     </fragment>
 </navigation>
