@@ -18,6 +18,10 @@ class PlaceDetailFragment : Fragment() {
 
     private var _binding: FragmentPlaceDetailBinding? = null
     private lateinit var editPlaceModel: PlaceModel
+    private val sharedContent: String by lazy {
+        val args = PlaceDetailFragmentArgs.fromBundle(requireArguments())
+        "${args.place.date} \n${args.place.title} \n${args.place.description}"
+    }
 
     // This property is only valid between onCreateView and
 // onDestroyView.
@@ -55,15 +59,10 @@ class PlaceDetailFragment : Fragment() {
         if (activity == null) {
             return null
         }
-        return arguments?.let {
-            val args = PlaceDetailFragmentArgs.fromBundle(it)
-            ShareCompat.IntentBuilder.from(requireActivity())
-                .setText("${args.place.date} \n${args.place.title} \n${args.place.description}")
-                .setType("text/plain")
-                .intent
-        } ?: run {
-            null
-        }
+        return ShareCompat.IntentBuilder.from(requireActivity())
+            .setText(sharedContent)
+            .setType("text/plain")
+            .intent
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
