@@ -1,8 +1,10 @@
 package com.pouyaa.imagediary.ui.fragments
 
 import android.content.Intent
+import android.mtp.MtpConstants
 import android.os.Bundle
 import android.view.*
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.R
@@ -15,7 +17,6 @@ import com.pouyaa.imagediary.model.PlaceModel
 class PlaceDetailFragment : Fragment() {
 
     private var _binding: FragmentPlaceDetailBinding? = null
-    private lateinit var shareContent: String
     private lateinit var editPlaceModel: PlaceModel
 
     // This property is only valid between onCreateView and
@@ -39,27 +40,37 @@ class PlaceDetailFragment : Fragment() {
         binding.place = args.place
         binding.invalidateAll()
         editPlaceModel = args.place
-        shareContent = "${args.place.date} \n${args.place.title} \n${args.place.description}"
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.place_details_menu, menu)
 
+        if (getShareIntent()?.resolveActivity(requireActivity().packageManager) == null) {
+            menu.findItem(R.id.placeShareMenuButton)?.isVisible = false
+        }
+    }
+
+    private fun getShareIntent(): Intent? {
+        if (activity == null) {
+            return null
+        }
+        return arguments?.let {
+            val args = PlaceDetailFragmentArgs.fromBundle(it)
+            ShareCompat.IntentBuilder.from(requireActivity())
+                .setText("${args.place.date} \n${args.place.title} \n${args.place.description}")
+                .setType("text/plain")
+                .intent
+        } ?: run {
+            null
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.placeShareMenuButton -> shareContent?.let {
-
-                val shareIntent = Intent().apply {
-                    action = Intent.ACTION_SEND_MULTIPLE
-                    putExtra(Intent.EXTRA_TEXT, it)
-                    type = "text/plain"
-                }
-                startActivity(Intent.createChooser(shareIntent, "Share to"))
+            R.id.placeShareMenuButton -> {
+                startActivity(getShareIntent())
             }
 
             R.id.placeEditMenuButton -> {
