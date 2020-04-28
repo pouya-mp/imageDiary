@@ -19,7 +19,11 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_placesFragment_to_placeDetailFragment"
-            app:destination="@id/placeDesctiptionFragment" />
+            app:destination="@id/placeDesctiptionFragment"
+            app:enterAnim="@anim/scale_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/scale_out" />
     </fragment>
     <fragment
         android:id="@+id/addPlacesFragment"

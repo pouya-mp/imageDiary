@@ -7,4 +7,5 @@
         android:toYDelta="0%"
         android:duration="@android:integer/config_mediumAnimTime"
         />
+
 </set>
