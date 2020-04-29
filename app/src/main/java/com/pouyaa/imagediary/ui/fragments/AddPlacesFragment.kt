@@ -21,6 +21,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pouyaa.imagediary.DataBaseHandler
 import com.pouyaa.imagediary.PickDate
 import com.pouyaa.imagediary.R
@@ -95,6 +99,38 @@ class AddPlacesFragment : Fragment() {
             }
         }
 
+        addLocationEditText.setOnClickListener {
+
+            try {
+
+                val fields = listOf(
+                    Place.Field.ID,
+                    Place.Field.NAME,
+                    Place.Field.LAT_LNG,
+                    Place.Field.ADDRESS
+                )
+
+                context?.let {
+                    val intent =
+                        Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                            .build(it)
+                    startActivityForResult(intent, LOCATION_REQUEST_CODE)
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+
+        context?.let {
+            if (!Places.isInitialized()) {
+                Places.initialize(it, resources.getString(R.string.google_maps_key))
+            }
+        }
+
+
     }
 
 
@@ -156,6 +192,19 @@ class AddPlacesFragment : Fragment() {
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             Log.e("Cancelled", "Cancelled")
+        } else if (requestCode == LOCATION_REQUEST_CODE) {
+            data?.let {
+
+                val place = Autocomplete.getPlaceFromIntent(it)
+                addLocationEditText.setText(place.address)
+
+                place.latLng?.let { it1 ->
+                    selectedPlaceLatitude = it1.latitude
+                    selectedPlaceLongitude = it1.longitude
+                }
+
+            }
+
         }
     }
 
@@ -346,6 +395,7 @@ class AddPlacesFragment : Fragment() {
         private const val GALLERY_PERMISSION_CODE = 1
         private const val CAMERA_PERMISSION_CODE = 2
         private const val IMAGE_DIRECTORY = "ImageDiaryImages"
+        private const val LOCATION_REQUEST_CODE = 3
     }
 
 }
