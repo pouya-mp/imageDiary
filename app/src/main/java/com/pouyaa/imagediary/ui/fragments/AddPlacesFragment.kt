@@ -27,6 +27,7 @@ import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.SaveImageToInternalStorage
 import com.pouyaa.imagediary.databinding.FragmentAddPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
+import com.pouyaa.imagediary.utils.CustomTimer
 import kotlinx.android.synthetic.main.fragment_add_places.*
 import java.io.IOException
 
@@ -36,6 +37,7 @@ import java.io.IOException
 class AddPlacesFragment : Fragment() {
 
     private var _binding: FragmentAddPlacesBinding? = null
+    private lateinit var timer: CustomTimer
 
     // This property is only valid between onCreateView and
 // onDestroyView.
@@ -47,7 +49,6 @@ class AddPlacesFragment : Fragment() {
     private var selectedPlaceLongitude: Double = 0.0
     private var updatePlaceWithId: Int? = null
     private var checkImage = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +63,8 @@ class AddPlacesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        timer = CustomTimer(lifecycle)
 
         val args = AddPlacesFragmentArgs.fromBundle(requireArguments())
 

@@ -1,6 +1,7 @@
 package com.pouyaa.imagediary.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -10,8 +11,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.databinding.ActivityMainBinding
+import com.pouyaa.imagediary.utils.CustomTimer
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        val TAG = "MainActivity"
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
@@ -36,6 +42,35 @@ class MainActivity : AppCompatActivity() {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
+
+        Log.i(TAG, "onCreate")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(TAG, "onStop")
+
+//        timer.stopTimer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i(TAG, "onDestroy")
     }
 
     override fun onSupportNavigateUp(): Boolean {
