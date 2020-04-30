@@ -5,4 +5,9 @@
         android:id="@+id/addPlacesFragment"
         android:icon="@android:drawable/ic_input_add"
         android:title="@string/add_place" />
+    <item
+        android:id="@+id/countdownTimer"
+        android:icon="@drawable/ic_timer_black_24dp"
+        android:title="@string/countdown_timer" />
+
 </menu>

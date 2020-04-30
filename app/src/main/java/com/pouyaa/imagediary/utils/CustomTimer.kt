@@ -9,7 +9,7 @@ import androidx.lifecycle.OnLifecycleEvent
 class CustomTimer(lifecycle: Lifecycle) : LifecycleObserver {
 
     companion object {
-        val TAG = "CustomTimer"
+        private const val TAG = "CustomTimer"
     }
 
     init {

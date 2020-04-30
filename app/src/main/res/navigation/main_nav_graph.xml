@@ -24,6 +24,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/scale_out" />
+        <action
+            android:id="@+id/action_placesFragment_to_countdownTimer"
+            app:destination="@id/countdownTimer" />
     </fragment>
     <fragment
         android:id="@+id/addPlacesFragment"
@@ -46,4 +49,8 @@
             android:id="@+id/action_placeDesctiptionFragment_to_addPlacesFragment"
             app:destination="@id/addPlacesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/countdownTimer"
+        android:name="com.pouyaa.imagediary.ui.fragments.CountdownTimer"
+        android:label="CountdownTimer" />
 </navigation>
