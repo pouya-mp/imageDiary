@@ -1,7 +1,6 @@
 package com.pouyaa.imagediary.utils
 
 import android.os.Handler
-import android.util.Log
 import android.widget.EditText
 
 class CustomCountdown() {
@@ -19,7 +18,6 @@ class CustomCountdown() {
                 countdownView.isFocusableInTouchMode = false
                 countDownTime--
                 countdownView.setText("$countDownTime")
-                Log.i("cnt", countDownTime.toString())
                 handler.postDelayed(runnable, 1000)
 
             }

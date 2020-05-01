@@ -1,8 +1,10 @@
 package com.pouyaa.imagediary.ui.fragments
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.mtp.MtpConstants
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +17,10 @@ import com.pouyaa.imagediary.model.PlaceModel
  * A simple [Fragment] subclass.
  */
 class PlaceDetailFragment : Fragment() {
+
+    private companion object {
+        private const val TAG = "placeDetailFragment"
+    }
 
     private var _binding: FragmentPlaceDetailBinding? = null
     private lateinit var editPlaceModel: PlaceModel
@@ -47,6 +53,7 @@ class PlaceDetailFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        Log.i(TAG, "onCreateOptionsMenu()")
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.place_details_menu, menu)
 
@@ -86,7 +93,72 @@ class PlaceDetailFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        Log.i(TAG, "onDestroyView()")
         super.onDestroyView()
         _binding = null
     }
+
+
+    override fun onDestroyOptionsMenu() {
+        Log.i(TAG, "onDestroyOptionsMenu()")
+        super.onDestroyOptionsMenu()
+    }
+
+
+    override fun onAttachFragment(childFragment: Fragment) {
+        Log.i(TAG, "onAttachFragment()")
+        super.onAttachFragment(childFragment)
+    }
+
+    override fun onAttach(context: Context) {
+        Log.i(TAG, "onAttach(context)")
+        super.onAttach(context)
+    }
+
+    override fun onAttach(activity: Activity) {
+        Log.i(TAG, "onAttach(activity)")
+        super.onAttach(activity)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate()")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onActivityCreated()")
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onStart() {
+        Log.i(TAG, "onStart()")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        Log.i(TAG, "onResume()")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.i(TAG, "onPause()")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.i(TAG, "onStop()")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        Log.i(TAG, "onDestroy()")
+        _binding = null
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        Log.i(TAG, "onDetach()")
+        super.onDetach()
+    }
+
 }
