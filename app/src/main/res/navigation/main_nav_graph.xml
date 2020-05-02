@@ -51,6 +51,6 @@
     </fragment>
     <fragment
         android:id="@+id/countdownTimer"
-        android:name="com.pouyaa.imagediary.ui.fragments.CountdownTimer"
+        android:name="com.pouyaa.imagediary.ui.fragments.CountdownTimerFragment"
         android:label="CountdownTimer" />
 </navigation>

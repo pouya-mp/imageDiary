@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.pouyaa.imagediary.databinding.FragmentCountdownTimerBinding
 import com.pouyaa.imagediary.utils.CustomCountdown
 
-class CountdownTimer : Fragment() {
+class CountdownTimerFragment : Fragment() {
 
     private companion object {
         private var TAG = "countdownTimerFragment"
@@ -18,8 +18,8 @@ class CountdownTimer : Fragment() {
 
     private var _binding: FragmentCountdownTimerBinding? = null
 
-    private val binding get() = _binding!!
-
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +46,10 @@ class CountdownTimer : Fragment() {
         if (binding.countDownTimerTimeInput.text.toString() == "") {
             Toast.makeText(context, "Enter number", Toast.LENGTH_SHORT).show()
         } else {
-            binding.countDownTimerTimeInput.text?.let {
-                it.toString()?.let { it1 ->
+            binding.countDownTimerTimeInput.text?.let { editable ->
+                editable.toString().let {
                     val cnt = CustomCountdown()
-                    cnt.startCountdownTimer(it1.toInt(), binding.countDownTimerTimeInput)
+                    cnt.startCountdownTimer(it.toInt(), binding.countDownTimerTimeInput)
 
                 }
 
@@ -81,11 +81,6 @@ class CountdownTimer : Fragment() {
     override fun onAttach(context: Context) {
         Log.i(TAG, "onAttach(context)")
         super.onAttach(context)
-    }
-
-    override fun onAttach(activity: Activity) {
-        Log.i(TAG, "onAttach(activity)")
-        super.onAttach(activity)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

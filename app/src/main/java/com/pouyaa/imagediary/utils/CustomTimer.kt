@@ -24,7 +24,7 @@ class CustomTimer(lifecycle: Lifecycle) : LifecycleObserver {
     private lateinit var runnable: Runnable
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    private fun startTimer() {
+    private fun start() {
 
         runnable = Runnable {
             secondsCount += 1
@@ -38,7 +38,7 @@ class CustomTimer(lifecycle: Lifecycle) : LifecycleObserver {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun stopTimer() {
+    private fun stop() {
         handler.removeCallbacks(runnable)
     }
 

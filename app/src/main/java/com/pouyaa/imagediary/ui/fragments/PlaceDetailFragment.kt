@@ -115,11 +115,6 @@ class PlaceDetailFragment : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onAttach(activity: Activity) {
-        Log.i(TAG, "onAttach(activity)")
-        super.onAttach(activity)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate()")
         super.onCreate(savedInstanceState)

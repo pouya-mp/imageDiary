@@ -11,11 +11,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        val TAG = "MainActivity"
+        const val TAG = "MainActivity"
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        Log.i(TAG, "onCreate")
+        Timber.i("onCreate")
     }
 
     override fun onStart() {
@@ -63,8 +64,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.i(TAG, "onStop")
-
-//        timer.stopTimer()
     }
 
     override fun onDestroy() {
