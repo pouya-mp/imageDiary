@@ -11,7 +11,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.databinding.ActivityMainBinding
-import com.pouyaa.imagediary.utils.CustomTimer
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,5 +74,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, drawerLayout)
+    }
+
+    override fun onRestart() {
+        Log.i(TAG, "onRestart()")
+        super.onRestart()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i(TAG, "onRestoreInstanceState()")
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState()")
+        super.onSaveInstanceState(outState)
     }
 }

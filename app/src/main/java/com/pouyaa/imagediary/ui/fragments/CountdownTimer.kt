@@ -118,6 +118,11 @@ class CountdownTimer : Fragment() {
         super.onStop()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState()")
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onDestroy() {
         Log.i(TAG, "onDestroy()")
         _binding = null
@@ -134,4 +139,6 @@ class CountdownTimer : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
