@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.databinding.FragmentPlaceDetailBinding
 import com.pouyaa.imagediary.model.PlaceModel
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -53,7 +54,7 @@ class PlaceDetailFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.i(TAG, "onCreateOptionsMenu()")
+        Timber.i("onCreateOptionsMenu()")
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.place_details_menu, menu)
 
@@ -93,66 +94,66 @@ class PlaceDetailFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        Log.i(TAG, "onDestroyView()")
+        Timber.i("onDestroyView()")
         super.onDestroyView()
         _binding = null
     }
 
 
     override fun onDestroyOptionsMenu() {
-        Log.i(TAG, "onDestroyOptionsMenu()")
+        Timber.i("onDestroyOptionsMenu()")
         super.onDestroyOptionsMenu()
     }
 
 
     override fun onAttachFragment(childFragment: Fragment) {
-        Log.i(TAG, "onAttachFragment()")
+        Timber.i("onAttachFragment()")
         super.onAttachFragment(childFragment)
     }
 
     override fun onAttach(context: Context) {
-        Log.i(TAG, "onAttach(context)")
+        Timber.i("onAttach(context)")
         super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i(TAG, "onCreate()")
+        Timber.i("onCreate()")
         super.onCreate(savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.i(TAG, "onActivityCreated()")
+        Timber.i("onActivityCreated()")
         super.onActivityCreated(savedInstanceState)
     }
 
     override fun onStart() {
-        Log.i(TAG, "onStart()")
+        Timber.i("onStart()")
         super.onStart()
     }
 
     override fun onResume() {
-        Log.i(TAG, "onResume()")
+        Timber.i("onResume()")
         super.onResume()
     }
 
     override fun onPause() {
-        Log.i(TAG, "onPause()")
+        Timber.i("onPause()")
         super.onPause()
     }
 
     override fun onStop() {
-        Log.i(TAG, "onStop()")
+        Timber.i("onStop()")
         super.onStop()
     }
 
     override fun onDestroy() {
-        Log.i(TAG, "onDestroy()")
+        Timber.i("onDestroy()")
         _binding = null
         super.onDestroy()
     }
 
     override fun onDetach() {
-        Log.i(TAG, "onDetach()")
+        Timber.i("onDetach()")
         super.onDetach()
     }
 

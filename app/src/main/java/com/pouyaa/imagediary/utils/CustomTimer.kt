@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import timber.log.Timber
 
 class CustomTimer(lifecycle: Lifecycle) : LifecycleObserver {
 
@@ -29,7 +30,7 @@ class CustomTimer(lifecycle: Lifecycle) : LifecycleObserver {
         runnable = Runnable {
             secondsCount += 1
 
-            Log.i(TAG, "Timer is at: $secondsCount")
+            Timber.i("Timer is at: $secondsCount")
 
             handler.postDelayed(runnable, 1000)
         }

@@ -48,27 +48,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.i(TAG, "onStart")
+        Timber.i("onStart")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i(TAG, "onResume")
+        Timber.i("onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.i(TAG, "onPause")
+        Timber.i("onPause")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.i(TAG, "onStop")
+        Timber.i("onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i(TAG, "onDestroy")
+        Timber.i("onDestroy")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -76,17 +76,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onRestart() {
-        Log.i(TAG, "onRestart()")
+        Timber.i("onRestart()")
         super.onRestart()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        Log.i(TAG, "onRestoreInstanceState()")
+        Timber.i("onRestoreInstanceState()")
         super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        Log.i(TAG, "onSaveInstanceState()")
+        Timber.i("onSaveInstanceState()")
         super.onSaveInstanceState(outState)
     }
 }

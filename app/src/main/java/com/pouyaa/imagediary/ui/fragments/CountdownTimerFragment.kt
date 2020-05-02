@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.pouyaa.imagediary.databinding.FragmentCountdownTimerBinding
 import com.pouyaa.imagediary.utils.CustomCountdown
+import timber.log.Timber
 
 class CountdownTimerFragment : Fragment() {
 
@@ -25,14 +26,14 @@ class CountdownTimerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.i(TAG, "onCreateView()")
+        Timber.i("onCreateView()")
         _binding = FragmentCountdownTimerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i(TAG, "onViewCreated()")
+        Timber.i("onViewCreated()")
         binding.startCountdown.setOnClickListener {
             startCountdown()
         }
@@ -64,73 +65,73 @@ class CountdownTimerFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.i(TAG, "onCreateOptionsMenu()")
+        Timber.i("onCreateOptionsMenu()")
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onDestroyOptionsMenu() {
-        Log.i(TAG, "onDestroyOptionsMenu()")
+        Timber.i("onDestroyOptionsMenu()")
         super.onDestroyOptionsMenu()
     }
 
     override fun onAttachFragment(childFragment: Fragment) {
-        Log.i(TAG, "onAttachFragment()")
+        Timber.i("onAttachFragment()")
         super.onAttachFragment(childFragment)
     }
 
     override fun onAttach(context: Context) {
-        Log.i(TAG, "onAttach(context)")
+        Timber.i("onAttach(context)")
         super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i(TAG, "onCreate()")
+        Timber.i("onCreate()")
         super.onCreate(savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.i(TAG, "onActivityCreated()")
+        Timber.i("onActivityCreated()")
         super.onActivityCreated(savedInstanceState)
     }
 
     override fun onStart() {
-        Log.i(TAG, "onStart()")
+        Timber.i("onStart()")
         super.onStart()
     }
 
     override fun onResume() {
-        Log.i(TAG, "onResume()")
+        Timber.i("onResume()")
         super.onResume()
     }
 
     override fun onPause() {
-        Log.i(TAG, "onPause()")
+        Timber.i("onPause()")
         super.onPause()
     }
 
     override fun onStop() {
-        Log.i(TAG, "onStop()")
+        Timber.i("onStop()")
         super.onStop()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        Log.i(TAG, "onSaveInstanceState()")
+        Timber.i("onSaveInstanceState()")
         super.onSaveInstanceState(outState)
     }
 
     override fun onDestroy() {
-        Log.i(TAG, "onDestroy()")
+        Timber.i("onDestroy()")
         _binding = null
         super.onDestroy()
     }
 
     override fun onDetach() {
-        Log.i(TAG, "onDetach()")
+        Timber.i("onDetach()")
         super.onDetach()
     }
 
     override fun onDestroyView() {
-        Log.i(TAG, "onDestroyView()")
+        Timber.i("onDestroyView()")
         super.onDestroyView()
         _binding = null
     }
