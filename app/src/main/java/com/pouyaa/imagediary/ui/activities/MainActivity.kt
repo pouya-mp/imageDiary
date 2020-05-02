@@ -80,11 +80,6 @@ class MainActivity : AppCompatActivity() {
         super.onRestart()
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        Timber.i("onRestoreInstanceState()")
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         Timber.i("onSaveInstanceState()")
         super.onSaveInstanceState(outState)

@@ -9,17 +9,12 @@ import timber.log.Timber
 
 class CustomTimer(lifecycle: Lifecycle) : LifecycleObserver {
 
-    companion object {
-        private const val TAG = "CustomTimer"
-    }
-
     init {
         lifecycle.addObserver(this)
     }
 
     // The number of seconds passed after timer was started.
     var secondsCount = 0
-        private set
 
     private var handler = Handler()
     private lateinit var runnable: Runnable

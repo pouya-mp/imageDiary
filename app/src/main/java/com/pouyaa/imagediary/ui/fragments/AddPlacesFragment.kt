@@ -29,6 +29,7 @@ import com.pouyaa.imagediary.databinding.FragmentAddPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
 import com.pouyaa.imagediary.utils.CustomTimer
 import kotlinx.android.synthetic.main.fragment_add_places.*
+import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -65,6 +66,10 @@ class AddPlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         timer = CustomTimer(lifecycle)
+
+        savedInstanceState?.let {
+            timer.secondsCount = it.getInt(SAVED_PASSED_SECONDS, 0)
+        }
 
         val args = AddPlacesFragmentArgs.fromBundle(requireArguments())
 
@@ -349,6 +354,13 @@ class AddPlacesFragment : Fragment() {
         private const val GALLERY_PERMISSION_CODE = 1
         private const val CAMERA_PERMISSION_CODE = 2
         private const val IMAGE_DIRECTORY = "ImageDiaryImages"
+
+        private const val SAVED_PASSED_SECONDS = "SAVED_PASSED_SECONDS"
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(SAVED_PASSED_SECONDS, timer.secondsCount)
+        super.onSaveInstanceState(outState)
+        Timber.i("onSaveInstanceState")
+    }
 }
