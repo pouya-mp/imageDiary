@@ -1,11 +1,8 @@
 package com.pouyaa.imagediary.ui.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.pouyaa.imagediary.databinding.FragmentCountdownTimerBinding
 import com.pouyaa.imagediary.utils.CustomCountdown
@@ -13,8 +10,10 @@ import timber.log.Timber
 
 class CountdownTimerFragment : Fragment() {
 
+    private var countdown = CustomCountdown()
+
     private companion object {
-        private var TAG = "countdownTimerFragment"
+        private const val SAVED_PASSED_SECONDS = "SAVED_PASSED_SECONDS"
     }
 
     private var _binding: FragmentCountdownTimerBinding? = null
@@ -33,6 +32,9 @@ class CountdownTimerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        savedInstanceState?.let {
+            countdown.countDownTime = it.getInt(SAVED_PASSED_SECONDS, 10)
+        }
         Timber.i("onViewCreated()")
         binding.startCountdown.setOnClickListener {
             startCountdown()
@@ -44,23 +46,12 @@ class CountdownTimerFragment : Fragment() {
     }
 
     private fun startCountdown() {
-        if (binding.countDownTimerTimeInput.text.toString() == "") {
-            Toast.makeText(context, "Enter number", Toast.LENGTH_SHORT).show()
-        } else {
-            binding.countDownTimerTimeInput.text?.let { editable ->
-                editable.toString().let {
-                    val cnt = CustomCountdown()
-                    cnt.startCountdownTimer(it.toInt(), binding.countDownTimerTimeInput)
+        countdown.startCountdownTimer()
 
-                }
-
-            }
-        }
     }
 
     private fun stopCountdown() {
-        val cnt = CustomCountdown()
-        cnt.stopCountdownTimer(binding.countDownTimerTimeInput)
+        countdown.stopCountdownTimer()
     }
 
 
@@ -115,6 +106,7 @@ class CountdownTimerFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(SAVED_PASSED_SECONDS, countdown.countDownTime)
         Timber.i("onSaveInstanceState()")
         super.onSaveInstanceState(outState)
     }

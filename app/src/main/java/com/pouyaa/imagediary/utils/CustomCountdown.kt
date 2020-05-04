@@ -1,37 +1,31 @@
 package com.pouyaa.imagediary.utils
 
 import android.os.Handler
-import android.widget.EditText
+import timber.log.Timber
 
 class CustomCountdown() {
 
 
     private var handler = Handler()
     private lateinit var runnable: Runnable
+    var countDownTime = 10
 
+    fun startCountdownTimer() {
 
-    fun startCountdownTimer(time: Int, countdownView: EditText) {
-        var countDownTime = time
         runnable = Runnable {
             if (countDownTime > 0) {
-                countdownView.isFocusable = false
-                countdownView.isFocusableInTouchMode = false
+
                 countDownTime--
-                countdownView.setText("$countDownTime")
+                Timber.i("$countDownTime")
                 handler.postDelayed(runnable, 1000)
 
             }
-            countdownView.isFocusable = true
-            countdownView.isFocusableInTouchMode = true
         }
         handler.post(runnable)
 
-
     }
 
-    fun stopCountdownTimer(countdownView: EditText) {
-        countdownView.isFocusable = true
-        countdownView.isFocusableInTouchMode = true
+    fun stopCountdownTimer() {
         handler.removeCallbacks(runnable)
     }
 
