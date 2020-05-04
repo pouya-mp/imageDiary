@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.DataBaseHandler
 import com.pouyaa.imagediary.PickDate
@@ -28,6 +29,7 @@ import com.pouyaa.imagediary.SaveImageToInternalStorage
 import com.pouyaa.imagediary.databinding.FragmentAddPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
 import com.pouyaa.imagediary.utils.CustomTimer
+import com.pouyaa.imagediary.viewmodel.AddPlacesViewModel
 import kotlinx.android.synthetic.main.fragment_add_places.*
 import timber.log.Timber
 import java.io.IOException
@@ -39,6 +41,7 @@ class AddPlacesFragment : Fragment() {
 
     private var _binding: FragmentAddPlacesBinding? = null
     private lateinit var timer: CustomTimer
+    private val viewModel: AddPlacesViewModel by viewModels()
 
     // This property is only valid between onCreateView and
 // onDestroyView.

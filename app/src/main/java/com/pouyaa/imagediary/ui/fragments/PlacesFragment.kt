@@ -3,6 +3,7 @@ package com.pouyaa.imagediary.ui.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -11,16 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pouyaa.imagediary.*
 import com.pouyaa.imagediary.databinding.FragmentPlacesBinding
 import com.pouyaa.imagediary.model.PlaceModel
+import com.pouyaa.imagediary.viewmodel.PlacesViewModel
 
-/**
- * A simple [Fragment] subclass.
- */
 class PlacesFragment : Fragment() {
 
     private var _binding: FragmentPlacesBinding? = null
+    private val viewModel: PlacesViewModel by viewModels()
 
-    // This property is only valid between onCreateView and
-// onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding
         get() = _binding!!
 
