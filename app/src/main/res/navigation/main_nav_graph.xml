@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_placesFragment_to_countdownTimer"
             app:destination="@id/countdownTimer" />
+        <action
+            android:id="@+id/action_placesFragment_to_stopwatchFragment"
+            app:destination="@id/stopwatchFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPlacesFragment"
@@ -53,4 +56,8 @@
         android:id="@+id/countdownTimer"
         android:name="com.pouyaa.imagediary.ui.fragments.CountdownTimerFragment"
         android:label="CountdownTimer" />
+    <fragment
+        android:id="@+id/stopwatchFragment"
+        android:name="com.pouyaa.imagediary.ui.fragments.StopwatchFragment"
+        android:label="StopwatchFragment" />
 </navigation>

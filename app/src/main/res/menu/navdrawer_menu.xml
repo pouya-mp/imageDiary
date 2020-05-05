@@ -9,5 +9,9 @@
         android:id="@+id/countdownTimer"
         android:icon="@drawable/ic_timer_black_24dp"
         android:title="@string/countdown_timer" />
+    <item
+        android:id="@+id/stopwatchFragment"
+        android:icon="@drawable/ic_av_timer_black_24dp"
+        android:title="Stopwatch" />
 
 </menu>
