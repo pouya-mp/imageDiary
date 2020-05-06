@@ -1,6 +1,7 @@
 package com.pouyaa.imagediary.viewmodel
 
 import android.os.Handler
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
@@ -8,7 +9,7 @@ import timber.log.Timber
 class CountdownViewModel : ViewModel() {
 
     companion object {
-        private const val NUMBER_OF_SECONDS = 100
+        private const val NUMBER_OF_SECONDS = 10
     }
 
     private var handler = Handler()
@@ -18,8 +19,17 @@ class CountdownViewModel : ViewModel() {
         set(value) {
             field = value
             remainingTime.postValue(value)
+
+            if (field <= 0) {
+                _countDownTimerDidFinish.postValue(true)
+            }
         }
     val remainingTime = MutableLiveData(NUMBER_OF_SECONDS)
+
+
+    private val _countDownTimerDidFinish = MutableLiveData(false)
+    val countDownTimerDidFinish: LiveData<Boolean>
+        get() = _countDownTimerDidFinish
 
     private fun startCountdownTimer() {
         if (runnable == null) {
@@ -52,4 +62,7 @@ class CountdownViewModel : ViewModel() {
         stopCountdownTimer()
     }
 
+    fun onCountdownTimerFinishCompleted() {
+        _countDownTimerDidFinish.value = false
+    }
 }

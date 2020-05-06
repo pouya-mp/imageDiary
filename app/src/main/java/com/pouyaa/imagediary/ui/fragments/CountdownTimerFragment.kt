@@ -6,6 +6,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.databinding.FragmentCountdownTimerBinding
 import com.pouyaa.imagediary.utils.CustomCountdown
 import com.pouyaa.imagediary.viewmodel.CountdownViewModel
@@ -34,6 +35,14 @@ class CountdownTimerFragment : Fragment() {
         viewModel.remainingTime.observe(viewLifecycleOwner, Observer {
             binding.textView.text = "${it ?: 0}"
         })
+
+        viewModel.countDownTimerDidFinish.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.onCountdownTimerFinishCompleted()
+                findNavController().popBackStack()
+            }
+        })
+
 
         binding.startCountdown.setOnClickListener {
             viewModel.didClickStartButton()

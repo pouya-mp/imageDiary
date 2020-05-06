@@ -16,7 +16,7 @@ class StopwatchViewModel : ViewModel() {
     private var handler = Handler()
     private var runnable: Runnable? = null
 
-    var secondsPassed = MutableLiveData(secondsCount)
+    val secondsPassed = MutableLiveData(secondsCount)
 
     private fun start() {
         if (runnable == null) {
