@@ -1,68 +1,48 @@
 package com.pouyaa.imagediary.viewmodel
 
-import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import timber.log.Timber
+import com.pouyaa.imagediary.utils.CustomCountdown
 
-class CountdownViewModel : ViewModel() {
+class CountdownViewModel : ViewModel(), CustomCountdown.TickInterface {
 
     companion object {
-        private const val NUMBER_OF_SECONDS = 10
+        private const val STARING_TIME = 10
     }
 
-    private var handler = Handler()
-    private var runnable: Runnable? = null
+    private val countDownTimer = CustomCountdown(STARING_TIME, this)
 
-    private var countDownTime = NUMBER_OF_SECONDS
-        set(value) {
-            field = value
-            remainingTime.postValue(value)
-
-            if (field <= 0) {
-                _countDownTimerDidFinish.postValue(true)
-            }
-        }
-    val remainingTime = MutableLiveData(NUMBER_OF_SECONDS)
-
+    private val _remainingTime = MutableLiveData(STARING_TIME)
+    val remainingTime: LiveData<Int>
+        get() = _remainingTime
 
     private val _countDownTimerDidFinish = MutableLiveData(false)
     val countDownTimerDidFinish: LiveData<Boolean>
         get() = _countDownTimerDidFinish
 
-    private fun startCountdownTimer() {
-        if (runnable == null) {
-            runnable = Runnable {
-                if (countDownTime > 0) {
+    override fun countdownTimerDidTick(second: Int) {
+        _remainingTime.postValue(second)
 
-                    countDownTime--
-                    Timber.i("$countDownTime")
-                    handler.postDelayed(runnable, 1000)
-
-                }
-            }
-            handler.post(runnable)
+        if (second <= 0) {
+            _countDownTimerDidFinish.value = true
         }
-
-
-    }
-
-    private fun stopCountdownTimer() {
-        countDownTime = NUMBER_OF_SECONDS
-        handler.removeCallbacks(runnable)
-        runnable = null
     }
 
     fun didClickStartButton() {
-        startCountdownTimer()
+        countDownTimer.start()
     }
 
     fun didClickStopButton() {
-        stopCountdownTimer()
+        countDownTimer.stop()
     }
 
     fun onCountdownTimerFinishCompleted() {
         _countDownTimerDidFinish.value = false
+    }
+
+    override fun onCleared() {
+        countDownTimer.stop()
+        super.onCleared()
     }
 }

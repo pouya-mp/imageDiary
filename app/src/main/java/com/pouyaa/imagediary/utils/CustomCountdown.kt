@@ -1,33 +1,51 @@
 package com.pouyaa.imagediary.utils
 
 import android.os.Handler
-import timber.log.Timber
 
-class CustomCountdown {
+class CustomCountdown(
+    private val startingSeconds: Int,
+    private val delegate: TickInterface? = null
+) {
+
+    interface TickInterface {
+        fun countdownTimerDidTick(second: Int)
+    }
 
     private var handler = Handler()
-    private lateinit var runnable: Runnable
-    var countDownTime = 10
-        private set
+    private var runnable: Runnable? = null
+    private var countDownTime = startingSeconds
+        set(value) {
+            field = value
+            delegate?.countdownTimerDidTick(field)
+        }
 
-    fun startCountdownTimer() {
 
-        runnable = Runnable {
-            if (countDownTime > 0) {
+    fun start() {
+        if (runnable == null) {
+            runnable = Runnable {
+                if (countDownTime > 0) {
+                    countDownTime--
 
-                countDownTime--
-                Timber.i("$countDownTime")
-                handler.postDelayed(runnable, 1000)
+                    runnable?.let {
+                        handler.postDelayed(it, 1000)
+                    }
 
+                }
             }
         }
-        handler.post(runnable)
+
+        runnable?.let {
+            handler.post(it)
+        }
 
     }
 
-    fun stopCountdownTimer() {
-        countDownTime = 10
-        handler.removeCallbacks(runnable)
+    fun stop() {
+        countDownTime = startingSeconds
+        runnable?.let {
+            handler.removeCallbacks(it)
+        }
+        runnable = null
     }
 
 }
