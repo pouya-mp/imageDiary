@@ -14,26 +14,29 @@ class StopwatchViewModel : ViewModel() {
         }
 
     private var handler = Handler()
-    private lateinit var runnable: Runnable
+    private var runnable: Runnable? = null
 
     var secondsPassed = MutableLiveData(secondsCount)
 
     private fun start() {
+        if (runnable == null) {
+            runnable = Runnable {
+                secondsCount += 1
 
-        runnable = Runnable {
-            secondsCount += 1
+                Timber.i("Timer is at: $secondsCount")
 
-            Timber.i("Timer is at: $secondsCount")
+                handler.postDelayed(runnable, 1000)
+            }
 
-            handler.postDelayed(runnable, 1000)
+            handler.post(runnable)
         }
 
-        handler.post(runnable)
     }
 
 
     private fun stop() {
         handler.removeCallbacks(runnable)
+        runnable = null
     }
 
     fun didClickStartButton() {
