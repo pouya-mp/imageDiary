@@ -7,7 +7,7 @@ import timber.log.Timber
 
 class StopwatchViewModel : ViewModel() {
 
-    var secondsCount = 0
+    private var secondsCount = 0
         set(value) {
             field = value
             secondsPassed.postValue(value)
@@ -25,17 +25,23 @@ class StopwatchViewModel : ViewModel() {
 
                 Timber.i("Timer is at: $secondsCount")
 
-                handler.postDelayed(runnable, 1000)
+                runnable?.let {
+                    handler.postDelayed(it, 1000)
+                }
             }
 
-            handler.post(runnable)
+            runnable?.let {
+                handler.post(it)
+            }
         }
 
     }
 
 
     private fun stop() {
-        handler.removeCallbacks(runnable)
+        runnable?.let {
+            handler.removeCallbacks(it)
+        }
         runnable = null
     }
 
