@@ -5,13 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pouyaa.imagediary.utils.CustomCountdown
 
-class CountdownViewModel : ViewModel(), CustomCountdown.TickInterface {
+class CountdownViewModel : ViewModel() {
 
     companion object {
         private const val STARING_TIME = 10
     }
 
-    private val countDownTimer = CustomCountdown(STARING_TIME, this)
+    private val countDownTimer =
+        CustomCountdown(STARING_TIME, object : CustomCountdown.TickInterface {
+            override fun countdownTimerDidTick(second: Int) {
+                _remainingTime.postValue(second)
+
+                if (second <= 0) {
+                    _countDownTimerDidFinish.value = true
+                }
+            }
+        })
 
     private val _remainingTime = MutableLiveData(STARING_TIME)
     val remainingTime: LiveData<Int>
@@ -20,14 +29,6 @@ class CountdownViewModel : ViewModel(), CustomCountdown.TickInterface {
     private val _countDownTimerDidFinish = MutableLiveData(false)
     val countDownTimerDidFinish: LiveData<Boolean>
         get() = _countDownTimerDidFinish
-
-    override fun countdownTimerDidTick(second: Int) {
-        _remainingTime.postValue(second)
-
-        if (second <= 0) {
-            _countDownTimerDidFinish.value = true
-        }
-    }
 
     fun didClickStartButton() {
         countDownTimer.start()
