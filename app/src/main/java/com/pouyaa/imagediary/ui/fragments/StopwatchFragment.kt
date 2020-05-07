@@ -36,7 +36,7 @@ class StopwatchFragment : Fragment() {
         viewModel.secondsPassed.observe(viewLifecycleOwner, Observer {
             binding.timeStopwatch.text = "${it ?: 0}"
         })
-
+        
         binding.startStopwatch.setOnClickListener { viewModel.didClickStartButton() }
         binding.stopStopwatch.setOnClickListener { viewModel.didClickStopButton() }
 

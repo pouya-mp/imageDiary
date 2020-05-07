@@ -1,57 +1,33 @@
 package com.pouyaa.imagediary.viewmodel
 
-import android.os.Handler
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import timber.log.Timber
+import com.pouyaa.imagediary.utils.CustomStopwatch
 
 class StopwatchViewModel : ViewModel() {
 
-    private var secondsCount = 0
-        set(value) {
-            field = value
-            secondsPassed.postValue(value)
-        }
-
-    private var handler = Handler()
-    private var runnable: Runnable? = null
-
-    val secondsPassed = MutableLiveData(secondsCount)
-
-    private fun start() {
-        if (runnable == null) {
-            runnable = Runnable {
-                secondsCount += 1
-
-                Timber.i("Timer is at: $secondsCount")
-
-                runnable?.let {
-                    handler.postDelayed(it, 1000)
-                }
-            }
-
-            runnable?.let {
-                handler.post(it)
-            }
-        }
-
+    companion object {
+        private const val STARTING_TIME = 0
     }
 
-
-    private fun stop() {
-        runnable?.let {
-            handler.removeCallbacks(it)
+    private val stopWatch = CustomStopwatch(object : CustomStopwatch.TickInterface {
+        override fun stopwatchDidTick(seconds: Int) {
+            _secondsPassed.postValue(seconds)
         }
-        runnable = null
-    }
+
+    })
+
+    private val _secondsPassed = MutableLiveData(STARTING_TIME)
+    val secondsPassed: LiveData<Int>
+        get() = _secondsPassed
 
     fun didClickStartButton() {
-        start()
+        stopWatch.start()
     }
 
     fun didClickStopButton() {
-        secondsCount = 0
-        stop()
+        stopWatch.stop()
     }
 
 }
