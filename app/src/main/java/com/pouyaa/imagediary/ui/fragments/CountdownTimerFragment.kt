@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -35,6 +34,8 @@ class CountdownTimerFragment : Fragment() {
             viewModelFactory
         ).get(CountdownViewModel::class.java)
 
+        binding.vm = viewModel
+
         return binding.root
     }
 
@@ -51,15 +52,6 @@ class CountdownTimerFragment : Fragment() {
                 findNavController().popBackStack()
             }
         })
-
-
-        binding.startCountdown.setOnClickListener {
-            viewModel.didClickStartButton()
-        }
-
-        binding.stopCountdown.setOnClickListener {
-            viewModel.didClickStopButton()
-        }
     }
 
     override fun onDestroyView() {

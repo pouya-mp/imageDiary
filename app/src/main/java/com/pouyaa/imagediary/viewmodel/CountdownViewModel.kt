@@ -28,11 +28,11 @@ class CountdownViewModel(private val remainingTimeInSeconds: Int) : ViewModel() 
     val countDownTimerDidFinish: LiveData<Boolean>
         get() = _countDownTimerDidFinish
 
-    fun didClickStartButton() {
+    fun onStartClick() {
         countDownTimer.start()
     }
 
-    fun didClickStopButton() {
+    fun onStopClick() {
         countDownTimer.stop()
     }
 

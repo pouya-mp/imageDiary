@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.pouyaa.imagediary.viewmodel.CountdownViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
@@ -25,6 +32,7 @@
             android:id="@+id/startCountdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.onStartClick()}"
             android:text="@string/start"
             android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +44,7 @@
             android:id="@+id/stopCountdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.onStopClick()}"
             android:text="@string/stop"
             android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="parent"
