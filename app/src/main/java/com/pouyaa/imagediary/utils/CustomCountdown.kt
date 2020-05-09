@@ -2,10 +2,35 @@ package com.pouyaa.imagediary.utils
 
 import android.os.Handler
 
-class CustomCountdown(
+class CustomCountdown private constructor(
     private val startingSeconds: Int,
     private val delegate: TickInterface? = null
 ) {
+
+    class Factory {
+
+        private var startingSeconds: Int = 0
+        private var delegate: TickInterface? = null
+
+        private companion object {
+            val instance = Factory()
+        }
+
+        fun setStartingSeconds(startingSeconds: Int): Factory {
+            instance.startingSeconds = startingSeconds
+            return instance
+        }
+
+        fun setDelegate(delegate: TickInterface): Factory {
+            instance.delegate = delegate
+            return instance
+        }
+
+        fun build(): CustomCountdown {
+            return CustomCountdown(startingSeconds, delegate)
+        }
+    }
+
 
     interface TickInterface {
         fun countdownTimerDidTick(second: Int)

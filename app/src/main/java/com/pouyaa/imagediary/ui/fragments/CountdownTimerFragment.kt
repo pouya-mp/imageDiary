@@ -1,16 +1,15 @@
 package com.pouyaa.imagediary.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.databinding.FragmentCountdownTimerBinding
-import com.pouyaa.imagediary.utils.CustomCountdown
 import com.pouyaa.imagediary.viewmodel.CountdownViewModel
-import timber.log.Timber
 
 class CountdownTimerFragment : Fragment() {
 

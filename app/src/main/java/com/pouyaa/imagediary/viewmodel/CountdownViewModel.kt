@@ -11,8 +11,9 @@ class CountdownViewModel : ViewModel() {
         private const val STARING_TIME = 10
     }
 
-    private val countDownTimer =
-        CustomCountdown(STARING_TIME, object : CustomCountdown.TickInterface {
+    private val countDownTimer: CustomCountdown = CustomCountdown.Factory().apply {
+        setStartingSeconds(10)
+        setDelegate(object : CustomCountdown.TickInterface {
             override fun countdownTimerDidTick(second: Int) {
                 _remainingTime.postValue(second)
 
@@ -21,6 +22,7 @@ class CountdownViewModel : ViewModel() {
                 }
             }
         })
+    }.build()
 
     private val _remainingTime = MutableLiveData(STARING_TIME)
     val remainingTime: LiveData<Int>
