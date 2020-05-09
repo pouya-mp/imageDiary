@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.databinding.FragmentCountdownTimerBinding
 import com.pouyaa.imagediary.viewmodel.CountdownViewModel
+import com.pouyaa.imagediary.viewmodelfactory.CountdownViewModelFactory
 
 class CountdownTimerFragment : Fragment() {
 
@@ -18,13 +20,21 @@ class CountdownTimerFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: CountdownViewModel by viewModels()
+    private lateinit var viewModel: CountdownViewModel
+    private lateinit var viewModelFactory: CountdownViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCountdownTimerBinding.inflate(inflater, container, false)
+
+        viewModelFactory = CountdownViewModelFactory(150)
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(CountdownViewModel::class.java)
+
         return binding.root
     }
 

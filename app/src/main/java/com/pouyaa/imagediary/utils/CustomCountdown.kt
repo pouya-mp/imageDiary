@@ -12,8 +12,12 @@ class CustomCountdown private constructor(
         private var startingSeconds: Int = 0
         private var delegate: TickInterface? = null
 
+        init {
+            instance = Factory()
+        }
+
         private companion object {
-            val instance = Factory()
+            lateinit var instance: Factory
         }
 
         fun setStartingSeconds(startingSeconds: Int): Factory {
@@ -27,7 +31,7 @@ class CustomCountdown private constructor(
         }
 
         fun build(): CustomCountdown {
-            return CustomCountdown(startingSeconds, delegate)
+            return CustomCountdown(instance.startingSeconds, instance.delegate)
         }
     }
 
