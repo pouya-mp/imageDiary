@@ -42,9 +42,7 @@ class CountdownTimerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.remainingTime.observe(viewLifecycleOwner, Observer {
-            binding.textView.text = "${it ?: 0}"
-        })
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.countDownTimerDidFinish.observe(viewLifecycleOwner, Observer {
             if (it) {
