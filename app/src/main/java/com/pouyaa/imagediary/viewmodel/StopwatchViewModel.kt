@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pouyaa.imagediary.utils.CustomStopwatch
 
-class StopwatchViewModel : ViewModel() {
+class StopwatchViewModel(private val stopAt: Int) : ViewModel() {
 
     companion object {
         private const val STARTING_TIME = 0
     }
 
     private val stopWatch = CustomStopwatch.Factory().apply {
-        setStopAt(10)
+        setStopAt(stopAt)
         setDelegate(object : CustomStopwatch.TickInterface {
             override fun stopwatchDidTick(seconds: Int) {
                 _secondsPassed.postValue(seconds)

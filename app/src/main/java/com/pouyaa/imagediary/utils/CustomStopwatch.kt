@@ -8,7 +8,7 @@ class CustomStopwatch private constructor(
 ) {
 
     class Factory {
-        private var stopAt = 0
+        private var stopAt = 4
         private var delegate: TickInterface? = null
 
         fun setStopAt(stopAt: Int): Factory {
