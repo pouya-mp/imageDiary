@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.databinding.FragmentStopwatchBinding
 import com.pouyaa.imagediary.viewmodel.StopwatchViewModel
 import com.pouyaa.imagediary.viewmodelfactory.StopwatchViewModelFactory
@@ -28,7 +29,8 @@ class StopwatchFragment : Fragment() {
     ): View? {
         _binding = FragmentStopwatchBinding.inflate(inflater, container, false)
 
-        viewModelFactory = StopwatchViewModelFactory(8)
+        val args = StopwatchFragmentArgs.fromBundle(requireArguments())
+        viewModelFactory = StopwatchViewModelFactory(args.time)
         viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(StopwatchViewModel::class.java)
@@ -42,8 +44,11 @@ class StopwatchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.startStopwatch.setOnClickListener { viewModel.didClickStartButton() }
-        binding.stopStopwatch.setOnClickListener { viewModel.didClickStopButton() }
+        viewModel.didClickStartButton()
+        binding.stopStopwatch.setOnClickListener {
+            viewModel.didClickStopButton()
+            findNavController().popBackStack()
+        }
 
     }
 
