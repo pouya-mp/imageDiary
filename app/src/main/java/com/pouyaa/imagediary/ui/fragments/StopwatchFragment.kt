@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pouyaa.imagediary.databinding.FragmentStopwatchBinding
 import com.pouyaa.imagediary.viewmodel.StopwatchViewModel
@@ -34,7 +33,7 @@ class StopwatchFragment : Fragment() {
             this, viewModelFactory
         ).get(StopwatchViewModel::class.java)
 
-
+        binding.vm = viewModel
         return binding.root
 
     }
@@ -42,10 +41,7 @@ class StopwatchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.secondsPassed.observe(viewLifecycleOwner, Observer {
-            binding.timeStopwatch.text = "${it ?: 0}"
-        })
-
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.startStopwatch.setOnClickListener { viewModel.didClickStartButton() }
         binding.stopStopwatch.setOnClickListener { viewModel.didClickStopButton() }
 
