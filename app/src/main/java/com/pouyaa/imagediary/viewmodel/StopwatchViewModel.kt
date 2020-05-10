@@ -11,12 +11,15 @@ class StopwatchViewModel : ViewModel() {
         private const val STARTING_TIME = 0
     }
 
-    private val stopWatch = CustomStopwatch(object : CustomStopwatch.TickInterface {
-        override fun stopwatchDidTick(seconds: Int) {
-            _secondsPassed.postValue(seconds)
-        }
+    private val stopWatch = CustomStopwatch.Factory().apply {
+        setStopAt(10)
+        setDelegate(object : CustomStopwatch.TickInterface {
+            override fun stopwatchDidTick(seconds: Int) {
+                _secondsPassed.postValue(seconds)
+            }
+        })
+    }.build()
 
-    })
 
     private val _secondsPassed = MutableLiveData(STARTING_TIME)
     val secondsPassed: LiveData<Int>

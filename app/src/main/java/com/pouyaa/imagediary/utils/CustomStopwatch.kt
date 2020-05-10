@@ -3,7 +3,30 @@ package com.pouyaa.imagediary.utils
 import android.os.Handler
 import timber.log.Timber
 
-class CustomStopwatch(private val delegate: TickInterface? = null) {
+class CustomStopwatch private constructor(
+    private val delegate: TickInterface? = null, private val stopAt: Int
+) {
+
+    class Factory {
+        private var stopAt = 0
+        private var delegate: TickInterface? = null
+
+        fun setStopAt(stopAt: Int): Factory {
+            this.stopAt = stopAt
+            return this
+        }
+
+        fun setDelegate(delegate: TickInterface?): Factory {
+            this.delegate = delegate
+            return this
+        }
+
+        fun build(): CustomStopwatch {
+            return CustomStopwatch(delegate, stopAt)
+        }
+
+
+    }
 
     interface TickInterface {
         fun stopwatchDidTick(seconds: Int)
@@ -22,13 +45,16 @@ class CustomStopwatch(private val delegate: TickInterface? = null) {
     fun start() {
         if (runnable == null) {
             runnable = Runnable {
-                secondsCount += 1
+                if (secondsCount < stopAt) {
+                    secondsCount += 1
 
-                Timber.i("Timer is at: $secondsCount")
+                    Timber.i("Timer is at: $secondsCount")
 
-                runnable?.let {
-                    handler.postDelayed(it, 1000)
+                    runnable?.let {
+                        handler.postDelayed(it, 1000)
+                    }
                 }
+
             }
 
             runnable?.let {

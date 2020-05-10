@@ -3,7 +3,6 @@ package com.pouyaa.imagediary.viewmodelfactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.pouyaa.imagediary.viewmodel.CountdownViewModel
-import java.lang.IllegalArgumentException
 
 class CountdownViewModelFactory(private val remainingTimeInSeconds: Int) :
     ViewModelProvider.Factory {
