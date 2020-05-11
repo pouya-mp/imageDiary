@@ -19,7 +19,8 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintBottom_toTopOf="@id/startStopwatch"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/startStopwatch"

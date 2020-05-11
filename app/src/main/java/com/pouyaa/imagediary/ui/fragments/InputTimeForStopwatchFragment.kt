@@ -35,7 +35,7 @@ class InputTimeForStopwatchFragment : Fragment() {
 
         binding.startStopwatch.setOnClickListener {
 
-            if (binding.stopwatchTimeInput.text.toString() != "") {
+            if (binding.stopwatchTimeInput.text.isNullOrBlank()) {
                 val seconds = binding.stopwatchTimeInput.text.toString().toInt()
                 if (seconds > 0) {
                     val action =
