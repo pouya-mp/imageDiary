@@ -1,7 +1,9 @@
 package com.pouyaa.imagediary.viewmodel
 
+import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.pouyaa.imagediary.utils.CustomStopwatch
 
@@ -20,14 +22,18 @@ class StopwatchViewModel(private val stopAt: Int) : ViewModel() {
         })
     }.build()
 
+    init {
+        stopWatch.start()
+    }
 
     private val _secondsPassed = MutableLiveData(STARTING_TIME)
     val secondsPassed: LiveData<Int>
         get() = _secondsPassed
 
-    fun didClickStartButton() {
-        stopWatch.start()
+    val formattedSeconds = Transformations.map(secondsPassed) {
+        DateUtils.formatElapsedTime(it.toLong())
     }
+
 
     fun didClickStopButton() {
         stopWatch.stop()

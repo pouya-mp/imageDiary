@@ -1,10 +1,12 @@
 package com.pouyaa.imagediary.ui.fragments
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.databinding.FragmentStopwatchBinding
@@ -44,7 +46,7 @@ class StopwatchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.didClickStartButton()
+
         binding.stopStopwatch.setOnClickListener {
             viewModel.didClickStopButton()
             findNavController().popBackStack()

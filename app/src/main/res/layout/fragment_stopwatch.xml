@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="@{String.valueOf(vm.secondsPassed)}"
+            android:text="@{vm.formattedSeconds}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
             app:layout_constraintBottom_toTopOf="@id/stopStopwatch"
             app:layout_constraintEnd_toEndOf="parent"
