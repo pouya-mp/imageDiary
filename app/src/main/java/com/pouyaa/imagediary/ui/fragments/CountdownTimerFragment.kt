@@ -32,7 +32,7 @@ class CountdownTimerFragment : Fragment() {
     ): View? {
         _binding = FragmentCountdownTimerBinding.inflate(inflater, container, false)
 
-        viewModelFactory = CountdownViewModelFactory(150)
+        viewModelFactory = CountdownViewModelFactory(6)
         viewModel = ViewModelProvider(
             this,
             viewModelFactory

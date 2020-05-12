@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pouyaa.imagediary.databinding.FragmentInputTimeForStopwatchBinding
+import com.pouyaa.imagediary.viewmodel.InputTimeForStopwatchViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -18,6 +20,8 @@ class InputTimeForStopwatchFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+    private val viewModel: InputTimeForStopwatchViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +29,7 @@ class InputTimeForStopwatchFragment : Fragment() {
     ): View? {
 
         _binding = FragmentInputTimeForStopwatchBinding.inflate(inflater, container, false)
+        binding.vm = viewModel
         return binding.root
 
 
@@ -32,21 +37,19 @@ class InputTimeForStopwatchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.stopwatchTimeInput.addTextChangedListener {
+            viewModel.changeDetected(binding.stopwatchTimeInput.text.toString())
+
+        }
+
 
         binding.startStopwatch.setOnClickListener {
 
-            if (binding.stopwatchTimeInput.text.isNotBlank()) {
-                val seconds = binding.stopwatchTimeInput.text.toString().toInt()
-                if (seconds > 0) {
-                    val action =
-                        InputTimeForStopwatchFragmentDirections.actionInputTimeForStopwatchFragmentToStopwatchFragment()
-                    action.time = seconds
-                    findNavController().navigate(action)
-                }
-            } else {
-                Toast.makeText(context, "Enter a time in seconds", Toast.LENGTH_SHORT).show()
+            viewModel.start()?.let {
+                findNavController().navigate(it)
             }
-
 
         }
     }

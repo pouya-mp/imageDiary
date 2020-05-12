@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.pouyaa.imagediary.viewmodel.InputTimeForStopwatchViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,17 +22,18 @@
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:hint="@string/enter_time_in_seconds"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintBottom_toTopOf="@id/startStopwatch"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:importantForAutofill="no" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/startStopwatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{vm.check}"
             android:text="@string/start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
