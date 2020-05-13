@@ -119,15 +119,14 @@
                         android:textSize="@dimen/edit_text_text_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/imageOfPlaceImageView"
-                    android:layout_width="@dimen/add_screen_place_image_size"
-                    android:layout_height="@dimen/add_screen_place_image_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/add_screen_place_image_marginTop"
                     android:background="@drawable/ic_image_gray_200dp"
                     android:padding="@dimen/add_screen_place_image_padding"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_image_gray_200dp"
+                    app:srcCompat="@drawable/ic_image_gray_200dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
