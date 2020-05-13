@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">خاطرات تصویری</string>
+
+    <string name="edit_text_hint_title">عنوان</string>
+    <string name="edit_text_hint_description">توضیحات</string>
+    <string name="edit_text_hint_date">تاریخ</string>
+    <string name="edit_text_hint_location">مکان</string>
+    <string name="text_add_image">افزودن تصویر</string>
+    <string name="btn_text_save">ذخیره</string>
+    <string name="selectImageAlertDialog">انتخاب</string>
+    <string name="selectPhotoFromLibrary">Select photo from gallery</string>
+    <string name="CapturePhotoFromCamera">Capture photo from camera</string>
+    <string name="failed">Failed!</string>
+    <string name="goToSettingsMessage">It Looks like you have turned off permissions required for this feature. It can be enabled under Application Settings</string>
+    <string name="goToSettings">GO TO SETTINGS</string>
+    <string name="cancel">Cancel</string>
+    <string name="pleaseEnterTitle">Please enter title</string>
+    <string name="pleaseEnterDescription">Please enter description</string>
+    <string name="pleaseEnterDate">Please enter date</string>
+    <string name="pleaseSelectLocation">Please select location</string>
+    <string name="pleaseAddImage">Please add image</string>
+    <string name="noPlacesAddedYet">No places added yet</string>
+    <string name="imageOfPlace">Image of place</string>
+
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+
+    <string name="changeImage">CHANGE IMAGE</string>
+    <string name="saveChanges">SAVE CHANGES</string>
+    <string name="add_place">Add Place</string>
+
+    <string name="start">شروع</string>
+    <string name="stop">پایان</string>
+    <string name="countdown_timer">شمارش معکوس</string>
+    <string name="enter_time_in_seconds">زمان را به ثانیه وارد کنید</string>
+    <string name="stopwatch_start_alert">کرونومتر شروع شد</string>
+</resources>
