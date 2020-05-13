@@ -1,13 +1,13 @@
 package com.pouyaa.imagediary.viewmodel
 
+import android.app.Application
 import android.text.format.DateUtils
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.utils.CustomStopwatch
 
-class StopwatchViewModel(private val stopAt: Int) : ViewModel() {
+class StopwatchViewModel(private val stopAt: Int, private val app: Application) :
+    AndroidViewModel(app) {
 
     companion object {
         private const val STARTING_TIME = 0
@@ -22,12 +22,22 @@ class StopwatchViewModel(private val stopAt: Int) : ViewModel() {
         })
     }.build()
 
+    private val _toastMessage = MutableLiveData("")
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
     init {
         stopWatch.start()
+
+        _toastMessage.value = app.getString(R.string.stopwatch_start_alert)
     }
 
+    private val _shouldPopView = MutableLiveData(false)
+    val shouldPopView: LiveData<Boolean>
+        get() = _shouldPopView
+
     private val _secondsPassed = MutableLiveData(STARTING_TIME)
-    private val secondsPassed: LiveData<Int>
+    val secondsPassed: LiveData<Int>
         get() = _secondsPassed
 
     val formattedSeconds = Transformations.map(secondsPassed) {
@@ -37,6 +47,11 @@ class StopwatchViewModel(private val stopAt: Int) : ViewModel() {
 
     fun didClickStopButton() {
         stopWatch.stop()
+        _shouldPopView.value = true
+    }
+
+    fun didFinishShowingToast() {
+        _toastMessage.value = ""
     }
 
 }
