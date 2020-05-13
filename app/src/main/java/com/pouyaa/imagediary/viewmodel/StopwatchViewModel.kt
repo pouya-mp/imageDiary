@@ -27,7 +27,7 @@ class StopwatchViewModel(private val stopAt: Int) : ViewModel() {
     }
 
     private val _secondsPassed = MutableLiveData(STARTING_TIME)
-    val secondsPassed: LiveData<Int>
+    private val secondsPassed: LiveData<Int>
         get() = _secondsPassed
 
     val formattedSeconds = Transformations.map(secondsPassed) {

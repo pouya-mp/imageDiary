@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.pouyaa.imagediary.viewmodel.CountdownViewModel" />
@@ -20,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="@{String.valueOf(vm.remainingTime)}"
+            android:text="@{vm.formatedSeconds}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
             app:layout_constraintBottom_toTopOf="@id/startCountdown"
             app:layout_constraintEnd_toEndOf="parent"

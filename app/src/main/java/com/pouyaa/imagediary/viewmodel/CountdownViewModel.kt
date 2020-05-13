@@ -1,7 +1,9 @@
 package com.pouyaa.imagediary.viewmodel
 
+import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.pouyaa.imagediary.utils.CustomCountdown
 
@@ -34,8 +36,12 @@ class CountdownViewModel(private val remainingTimeInSeconds: Int) : ViewModel() 
     }.build()
 
     private val _remainingTime = MutableLiveData(remainingTimeInSeconds)
-    val remainingTime: LiveData<Int>
+    private val remainingTime: LiveData<Int>
         get() = _remainingTime
+
+    val formatedSeconds = Transformations.map(remainingTime) {
+        DateUtils.formatElapsedTime(it.toLong())
+    }
 
     private val _countDownTimerDidFinish = MutableLiveData(false)
     val countDownTimerDidFinish: LiveData<Boolean>
