@@ -32,9 +32,9 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/addTitleTextInputLayout"
                     style="@style/Widget.Design.TextInputLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/addDateTextInputLayout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -46,7 +46,8 @@
                         android:inputType="textCapWords"
                         android:text="@{place.title}"
                         android:textColor="@color/primary_text_color"
-                        android:textColorHint="@color/secondary_text_color" />
+                        android:textColorHint="@color/secondary_text_color"
+                        android:textSize="16sp" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -76,12 +77,11 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/addDateTextInputLayout"
                     style="@style/Widget.Design.TextInputLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/add_screen_til_marginTop"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addDescriptionTextInputLayout">
+                    app:layout_constraintStart_toEndOf="@id/addTitleTextInputLayout"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/addDateEditText"
@@ -105,7 +105,7 @@
                     android:layout_marginTop="@dimen/add_screen_til_marginTop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addDateTextInputLayout">
+                    app:layout_constraintTop_toBottomOf="@id/addDescriptionTextInputLayout">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/addLocationEditText"
@@ -125,17 +125,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/add_screen_place_image_marginTop"
                     android:background="@drawable/ic_image_gray_200dp"
+                    android:contentDescription="@string/image_of_place"
                     android:padding="@dimen/add_screen_place_image_padding"
-                    app:srcCompat="@drawable/ic_image_gray_200dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/addImageTextView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout"
+                    app:srcCompat="@drawable/ic_image_gray_200dp" />
 
                 <TextView
                     android:id="@+id/addImageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/add_screen_place_image_marginTop"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:padding="@dimen/add_screen_text_add_image_padding"
@@ -143,15 +145,15 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/add_screen_text_add_image_textSize"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/saveButton"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/saveButton"
+                    app:layout_constraintStart_toEndOf="@id/imageOfPlaceImageView"
                     app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout" />
 
 
                 <Button
                     android:id="@+id/saveButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/add_screen_btn_save_marginTop"
@@ -162,9 +164,10 @@
                     android:text="@string/btn_text_save"
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/btn_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageOfPlaceImageView" />
+                    app:layout_constraintStart_toEndOf="@id/addImageTextView"
+                    app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

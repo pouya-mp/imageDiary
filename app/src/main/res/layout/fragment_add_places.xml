@@ -130,9 +130,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@id/addLocationTextInputLayout"
+                    android:contentDescription="@string/image_of_place" />
 
                 <TextView
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/addImageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

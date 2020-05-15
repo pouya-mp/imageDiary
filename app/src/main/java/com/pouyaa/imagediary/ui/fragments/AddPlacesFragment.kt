@@ -79,7 +79,7 @@ class AddPlacesFragment : Fragment() {
         args.place?.let {
             checkImage = true
             savedImageOnInternalStorage = Uri.parse(args.place?.image)
-            updatePlaceWithId = args.place?.id
+            updatePlaceWithId = it.id
         }
 
         binding.apply {
@@ -278,7 +278,6 @@ class AddPlacesFragment : Fragment() {
     private fun checkIsEmptyOnAddPlaceFields(): Boolean {
         var result = false
         when {
-
             binding.addTitleEditText.text.isNullOrEmpty() -> {
                 Toast.makeText(activity, getString(R.string.pleaseEnterTitle), Toast.LENGTH_SHORT)
                     .show()
