@@ -1,12 +1,9 @@
 package com.pouyaa.imagediary.ui.activities
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -15,7 +12,6 @@ import androidx.navigation.ui.NavigationUI
 import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.databinding.ActivityMainBinding
 import com.pouyaa.imagediary.viewmodel.MainViewModel
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 

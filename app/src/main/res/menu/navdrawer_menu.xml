@@ -11,6 +11,6 @@
     <item
         android:id="@+id/inputTimeForStopwatchFragment"
         android:icon="@drawable/ic_av_timer_black_24dp"
-        android:title="Stopwatch" />
+        android:title="@string/stopwatch" />
 
 </menu>

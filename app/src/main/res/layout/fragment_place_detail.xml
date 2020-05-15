@@ -53,7 +53,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/titleOfPlaceDetailFragment"
-                    android:contentDescription="User image" />
+                    android:contentDescription="@string/image_of_place" />
 
                 <TextView
                     android:id="@+id/descriptionOfPlaceDetailsFragment"

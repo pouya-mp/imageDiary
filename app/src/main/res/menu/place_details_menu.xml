@@ -6,11 +6,11 @@
     <item
         android:id="@+id/placeEditMenuButton"
         android:icon="@drawable/ic_edit_white_24dp"
-        android:title="edit"
+        android:title="@string/edit"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/placeShareMenuButton"
         android:icon="@android:drawable/ic_menu_share"
-        android:title="Share"
+        android:title="@string/share"
         app:showAsAction="ifRoom" />
 </menu>

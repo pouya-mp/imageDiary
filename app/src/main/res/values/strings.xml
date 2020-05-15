@@ -34,4 +34,8 @@
     <string name="countdown_timer">Countdown Timer</string>
     <string name="enter_time_in_seconds">Enter time in seconds</string>
     <string name="stopwatch_start_alert">Stopwatch started</string>
+    <string name="image_of_place">Image of place</string>
+    <string name="stopwatch">Stopwatch</string>
+    <string name="edit">Edit</string>
+    <string name="share">Share</string>
 </resources>

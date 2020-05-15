@@ -69,6 +69,7 @@ class CountdownTimerFragment : Fragment() {
         buzzer?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 it.vibrate(VibrationEffect.createWaveform(pattern, -1))
+
             } else {
                 it.vibrate(pattern, -1)
             }

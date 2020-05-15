@@ -8,30 +8,34 @@
     <string name="text_add_image">افزودن تصویر</string>
     <string name="btn_text_save">ذخیره</string>
     <string name="selectImageAlertDialog">انتخاب</string>
-    <string name="selectPhotoFromLibrary">Select photo from gallery</string>
-    <string name="CapturePhotoFromCamera">Capture photo from camera</string>
-    <string name="failed">Failed!</string>
-    <string name="goToSettingsMessage">It Looks like you have turned off permissions required for this feature. It can be enabled under Application Settings</string>
-    <string name="goToSettings">GO TO SETTINGS</string>
-    <string name="cancel">Cancel</string>
-    <string name="pleaseEnterTitle">Please enter title</string>
-    <string name="pleaseEnterDescription">Please enter description</string>
-    <string name="pleaseEnterDate">Please enter date</string>
-    <string name="pleaseSelectLocation">Please select location</string>
-    <string name="pleaseAddImage">Please add image</string>
-    <string name="noPlacesAddedYet">No places added yet</string>
-    <string name="imageOfPlace">Image of place</string>
+    <string name="selectPhotoFromLibrary">انتخاب عکس از گالری</string>
+    <string name="CapturePhotoFromCamera">انتخاب عکس از دوربین</string>
+    <string name="failed">خطا!</string>
+    <string name="goToSettingsMessage">دسترسی های لازم برای انجام اینکار وجود ندارد، امکان اجازه دادن از تنظیمات وجود دارد</string>
+    <string name="goToSettings">برو به تظیمات</string>
+    <string name="cancel">انصراف</string>
+    <string name="pleaseEnterTitle">عنوان را وارد کنید</string>
+    <string name="pleaseEnterDescription">توضیحات را وارد کنید</string>
+    <string name="pleaseEnterDate">تاریخ را وارد کنید</string>
+    <string name="pleaseSelectLocation">مکان را وارد کنید</string>
+    <string name="pleaseAddImage">یک عکس انتخاب کنید</string>
+    <string name="noPlacesAddedYet">هنوز هیچ مکانی اضافه نشده</string>
+    <string name="imageOfPlace">عکس از مکان</string>
 
-    <string name="description">Description</string>
-    <string name="location">Location</string>
+    <string name="description">توضیحات</string>
+    <string name="location">مکان</string>
 
-    <string name="changeImage">CHANGE IMAGE</string>
-    <string name="saveChanges">SAVE CHANGES</string>
-    <string name="add_place">Add Place</string>
+    <string name="changeImage">تغییر عکس</string>
+    <string name="saveChanges">ذخیره تغییرات</string>
+    <string name="add_place">خاطره جدید</string>
 
     <string name="start">شروع</string>
     <string name="stop">پایان</string>
     <string name="countdown_timer">شمارش معکوس</string>
     <string name="enter_time_in_seconds">زمان را به ثانیه وارد کنید</string>
     <string name="stopwatch_start_alert">کرونومتر شروع شد</string>
+    <string name="image_of_place">عکس از مکان</string>
+    <string name="stopwatch">کرنومتر</string>
+    <string name="edit">ویرایش</string>
+    <string name="share">اشتراک گذاری</string>
 </resources>
