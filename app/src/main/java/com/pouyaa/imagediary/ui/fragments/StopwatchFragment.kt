@@ -51,9 +51,6 @@ class StopwatchFragment : Fragment() {
             }
         })
 
-        binding.stopStopwatch.setOnClickListener {
-            viewModel.didClickStopButton()
-        }
 
         viewModel.shouldPopView.observe(viewLifecycleOwner, Observer {
             if (it) {
