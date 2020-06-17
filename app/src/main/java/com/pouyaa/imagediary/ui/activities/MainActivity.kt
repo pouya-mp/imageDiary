@@ -11,7 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.pouyaa.imagediary.R
 import com.pouyaa.imagediary.databinding.ActivityMainBinding
+import com.pouyaa.imagediary.ui.fragments.CustomFragment
 import com.pouyaa.imagediary.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +44,20 @@ class MainActivity : AppCompatActivity() {
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
+        }
+
+        startCustomFragment.setOnClickListener {
+            val manager = supportFragmentManager
+            val transaction = manager.beginTransaction()
+
+            transaction.add(
+                R.id.customFragmentContainer,
+                CustomFragment.newInstance("Saeed", "Pouya"),
+                CustomFragment.TAG
+            )
+            transaction.addToBackStack(null)
+
+            transaction.commit()
         }
     }
 
